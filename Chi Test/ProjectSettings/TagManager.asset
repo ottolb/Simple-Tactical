@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Powerup
+  - Path Trigger
+  - DeathZone
+  - Block
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - UnitSelection
   - 
   - 
   - 
