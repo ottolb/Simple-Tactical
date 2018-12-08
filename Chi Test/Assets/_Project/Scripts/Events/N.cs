@@ -33,10 +33,23 @@ namespace Game.Event
         /// </summary>
         public class Game
         {
+
+            /// <summary>
+            /// Dispacth to start game loading
+            /// </summary>
+            public const string Load = "Game.Load";
+
+            /// <summary>
+            /// Dispatch to setup other sub controllers
+            /// </summary>
+            public const string Setup = "Game.Load";
+
             /// <summary>
             /// When game can be started.
             /// </summary>
             public const string Start = "Game.Started";
+
+
             public const string Over = "Game.Over";
             public const string Points = "Game.Points";
 

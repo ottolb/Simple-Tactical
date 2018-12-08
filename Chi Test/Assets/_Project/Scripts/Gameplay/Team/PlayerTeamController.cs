@@ -9,34 +9,23 @@ namespace Game.Gameplay
     /// <summary>
     /// Player Units controllers
     /// </summary>
-    public class PUController : MonoBehaviour
+    public class PlayerTeamController : BaseTeamController
     {
         BaseInput _input;
         Camera cam;
 
-        public int turnPriority;
-
         public LayerMask floorLayerMask, blockLayerMask;
-
-        bool isPlaying, isMyTurn;
 
         public GameObject cubeHitPos;
 
 
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             _input = BaseInput.SelectInput(gameObject);
             cam = Camera.main;
             EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
-
-            EventManager.StartListening(N.Game.Start, OnGameStarted);
-            EventManager.StartListening(N.Game.Over, OnGameStarted);
-            EventManager.StartListening(N.Game.TurnChanged, OnTurnChanged);
-
-
-            //EventManager.StartListening(N.Turn.Passed, OnLevelPassed);
-
         }
 
 
@@ -83,25 +72,6 @@ namespace Game.Gameplay
             return false;
         }
 
-
-        void OnGameStarted(object p_data)
-        {
-            isPlaying = true;
-            EventManager.TriggerEvent(N.Game.TurnChanged, this);
-        }
-
-        void OnGameOver(object p_data)
-        {
-            isPlaying = false;
-        }
-
-        void OnTurnChanged(object p_data)
-        {
-            if (p_data as PUController == this)
-            {
-                isMyTurn = true;
-            }
-        }
 
         void OnBalanceUpdated(object p_data)
         {

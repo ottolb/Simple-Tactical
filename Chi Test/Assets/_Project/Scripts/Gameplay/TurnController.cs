@@ -12,7 +12,7 @@ namespace Game.Gameplay
 
         bool isPlaying, isWaiting;
 
-        public List<PUController> unitsController;
+        public List<BaseTeamController> unitsController;
 
         public int turnIndex;
 
@@ -57,11 +57,11 @@ namespace Game.Gameplay
 
         void OnRegisterUnitController(object p_data)
         {
-            PUController controller = (PUController)p_data;
+            BaseTeamController controller = (BaseTeamController)p_data;
             if (!unitsController.Contains(controller))
                 unitsController.Add(controller);
 
-            unitsController.Sort(delegate (PUController p_controller1, PUController p_controller2)
+            unitsController.Sort(delegate (BaseTeamController p_controller1, BaseTeamController p_controller2)
             {
                 return p_controller1.turnPriority.CompareTo(p_controller2.turnPriority);
             });

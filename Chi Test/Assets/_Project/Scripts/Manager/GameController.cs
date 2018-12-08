@@ -40,7 +40,7 @@ namespace Game
 
         void LoadGame()
         {
-            EventManager.TriggerEvent(N.Level.Load);
+            EventManager.TriggerEvent(N.Game.Load);
         }
 
         void StartGame()
