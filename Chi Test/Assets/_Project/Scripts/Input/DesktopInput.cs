@@ -64,7 +64,7 @@ namespace Game.GameInput
         }
 
 
-        public override bool IsClicking()
+        public override bool WasClicked()
         {
             return Input.GetMouseButtonDown(0);
         }

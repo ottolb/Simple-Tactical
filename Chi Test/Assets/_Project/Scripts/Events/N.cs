@@ -51,6 +51,9 @@ namespace Game.Event
             /// </summary>
             //public const string AllBlocksCaptured = "Game.AllBlocksCaptured";
 
+            public const string TurnChanged = "Game.TurnChanged";
+            public const string TurnFinished = "Game.TurnFinished";
+            public const string RegisterUnitController = "Game.RegisterUnitController";
         }
 
         public class Level

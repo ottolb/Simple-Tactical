@@ -59,7 +59,7 @@ namespace Game.GameInput
                 pressing = CheckPress();
         }
 
-        public override bool IsClicking()
+        public override bool WasClicked()
         {
             if (touches.Length == 0)
                 return false;

@@ -110,7 +110,7 @@ namespace Game.GameInput
             return baseInput;
         }
 
-        public virtual bool IsClicking()
+        public virtual bool WasClicked()
         {
             return false;
         }
