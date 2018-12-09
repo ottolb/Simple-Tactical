@@ -123,6 +123,9 @@ namespace Game.Gameplay
 
             canAttack = false;
             Debug.LogFormat("#Character# Character {0} won't attack ", name);
+
+            //todo: Team controller should handle that
+            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
         }
 
     }

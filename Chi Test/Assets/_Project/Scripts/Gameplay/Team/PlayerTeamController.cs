@@ -28,6 +28,9 @@ namespace Game.Gameplay
             _input = BaseInput.SelectInput(gameObject);
             cam = Camera.main;
             EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
+
+            //UI events
+            EventUIManager.StartListening(NUI.HUD.EndTurn, OnPlayerTurnEndAction);
         }
 
         protected override void Init()
@@ -121,6 +124,11 @@ namespace Game.Gameplay
         void OnBalanceUpdated(object p_data)
         {
 
+        }
+
+        void OnPlayerTurnEndAction(object p_data)
+        {
+            EventManager.TriggerEvent(N.Game.TurnFinished);
         }
     }
 }
