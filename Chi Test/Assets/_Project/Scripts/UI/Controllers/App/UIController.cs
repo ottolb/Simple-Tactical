@@ -40,6 +40,7 @@ namespace Game.UI
             EventUIManager.StartListening(NUI.Home.ShowTutorial, OnShowTutorial);
 
             EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
+            EventUIManager.StartListening(NUI.HUD.SetActionButton, OnUpdateActionButtons);
         }
 
         void OnContinueClicked(object p_desc)
@@ -105,10 +106,17 @@ namespace Game.UI
             tutoUI.Show(false);
         }
 
-        void OnPlayerTurn(object p_blocks)
+        void OnPlayerTurn(object p_unit)
         {
-            hudUI.OnTurnChanged(true);
+            hudUI.TurnChanged(true);
         }
+
+        void OnUpdateActionButtons(object p_hasActions)
+        {
+            bool hasAction = (bool)p_hasActions;
+            hudUI.UpdateActionButtons(true);
+        }
+
 
         #region Properties
 

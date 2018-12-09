@@ -36,6 +36,9 @@ namespace Game.Event
             public const string PlayerTurn = "HUD.PlayerTurn";
             public const string Blocks = "HUD.Blocks";
             public const string MoreBlocks = "HUD.MoreBlocks";
+            public const string SetActionButton = "HUD.SetActionButton";
+            public const string EndTurn = "HUD.EndTurn";
+            public const string WaitAction = "HUD.WaitAction";
         }
 
         /// <summary>

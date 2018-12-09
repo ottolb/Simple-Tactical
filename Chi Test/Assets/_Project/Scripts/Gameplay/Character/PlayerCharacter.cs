@@ -33,6 +33,8 @@ namespace Game.Gameplay
 
             EventManager.StartListening(N.Player.MoveUnit, OnMoveUnit);
             EventManager.StartListening(N.Player.CheckUnitMovement, OnCheckUnitMovement);
+
+            EventUIManager.StartListening(NUI.HUD.WaitAction, OnWaitAction);
         }
 
         public override void Init()
@@ -51,9 +53,11 @@ namespace Game.Gameplay
         {
             if (p_data as Transform == transform)
             {
+                Debug.LogFormat("#Character# Character {0} is selected", name);
+
                 selectParticle.SetActive(true);
                 isSelected = true;
-
+                EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
             }
             else
             {
@@ -88,13 +92,20 @@ namespace Game.Gameplay
                     _navMeshAgent.SetDestination(position);
                     canMove = false;
                     moveAreaParticle.SetActive(false);
+                    moveIndicator.SetActive(false);
+
+                    Debug.LogFormat("#Character# Character {0} moved ", name);
+                }
+                else
+                {
+                    Debug.LogFormat("#Character# Character {0} is too far away from destination point ", name);
                 }
             }
         }
 
         void OnCheckUnitMovement(object p_data)
         {
-            if (!isSelected)
+            if (!isSelected || !canMove)
                 return;
 
             Vector3 position = (Vector3)p_data;
@@ -104,5 +115,15 @@ namespace Game.Gameplay
                 moveIndicatorMtl.DOColor(hasMoveEnergy ? movementAllowedColor : movementBlockedColor, 0.2f);
             hasMoveEnergy = !aux;
         }
+
+        void OnWaitAction(object p_data)
+        {
+            if (!isSelected)
+                return;
+
+            canAttack = false;
+            Debug.LogFormat("#Character# Character {0} won't attack ", name);
+        }
+
     }
 }

@@ -51,16 +51,35 @@ namespace Game.UI
 
         }
 
-        public void OnTurnChanged(bool p_playerTurn)
+        public void TurnChanged(bool p_playerTurn)
         {
             playerTurnT.gameObject.SetActive(p_playerTurn);
             enemyTurnT.gameObject.SetActive(!p_playerTurn);
             turnButtonsCtr.SetActive(p_playerTurn);
         }
 
+        public void UpdateActionButtons(bool p_hasAction)
+        {
+            waitBt.gameObject.SetActive(p_hasAction);
+            endTurnBt.gameObject.SetActive(!p_hasAction);
+        }
+
         public void FadeOut()
         {
             fadeAnim.DORestartById("FadeOut");
         }
+
+        #region Buttons
+        void OnWaitClicked(ButtonView p_button)
+        {
+            EventUIManager.TriggerEvent(NUI.HUD.WaitAction);
+        }
+
+        void OnEndTurnClicked(ButtonView p_button)
+        {
+            EventUIManager.TriggerEvent(NUI.HUD.EndTurn);
+        }
+
+        #endregion
     }
 }
