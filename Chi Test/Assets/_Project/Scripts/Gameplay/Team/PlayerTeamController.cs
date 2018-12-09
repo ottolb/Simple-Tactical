@@ -102,7 +102,6 @@ namespace Game.Gameplay
         bool CheckUnitSelection()
         {
             Ray ray = cam.ScreenPointToRay(_input.pos);
-            //Debug.DrawRay(ray.origin, ray.direction * 1000, Color.red);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, unitSelectionLayerMask))
             {

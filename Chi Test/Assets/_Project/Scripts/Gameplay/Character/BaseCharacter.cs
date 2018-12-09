@@ -11,39 +11,39 @@ namespace Game.Gameplay
         public float speed;
         NavMeshAgent _navMeshAgent;
 
-        void Awake()
+        protected virtual void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
 
         }
 
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
 
         }
 
-        public void Die()
+        public virtual void Die()
         {
 
         }
 
-        public void Init()
+        public virtual void Init()
         {
 
         }
 
-        public void Move()
+        public virtual void Move()
         {
 
         }
 
-        public void TakeDamage(float p_amount)
+        public virtual void TakeDamage(float p_amount)
         {
 
         }
