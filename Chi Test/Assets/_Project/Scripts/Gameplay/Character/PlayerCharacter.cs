@@ -80,12 +80,15 @@ namespace Game.Gameplay
 
         void OnMoveUnit(object p_data)
         {
-            if (isSelected)
+            if (isSelected && canMove)
             {
-                Vector3 position = (Vector3)p_data;
-                _navMeshAgent.SetDestination(position);
-                canMove = false;
-                moveAreaParticle.SetActive(false);
+                if (hasMoveEnergy)
+                {
+                    Vector3 position = (Vector3)p_data;
+                    _navMeshAgent.SetDestination(position);
+                    canMove = false;
+                    moveAreaParticle.SetActive(false);
+                }
             }
         }
 
@@ -96,10 +99,10 @@ namespace Game.Gameplay
 
             Vector3 position = (Vector3)p_data;
             moveIndicator.transform.position = position;
-            bool aux = Vector3.Distance(transform.position, position) > moveArea;
+            bool aux = HasMoveEnergy(position);
             if (aux != hasMoveEnergy)
                 moveIndicatorMtl.DOColor(hasMoveEnergy ? movementAllowedColor : movementBlockedColor, 0.2f);
-            hasMoveEnergy = aux;
+            hasMoveEnergy = !aux;
         }
     }
 }

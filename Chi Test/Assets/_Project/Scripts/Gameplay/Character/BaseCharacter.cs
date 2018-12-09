@@ -53,5 +53,10 @@ namespace Game.Gameplay
         {
 
         }
+
+        protected bool HasMoveEnergy(Vector3 p_target)
+        {
+            return Vector3.Distance(transform.position, p_target) > moveArea;
+        }
     }
 }
