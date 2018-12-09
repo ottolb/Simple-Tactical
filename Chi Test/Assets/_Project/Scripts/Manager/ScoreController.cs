@@ -121,7 +121,7 @@ namespace Game
         void OnBlockCaptured(object p_block)
         {
             Gameplay.BaseBlock t = (Gameplay.BaseBlock)p_block;
-            AddScore(blockScore * (Level.LevelController.CurrentLevel + 1));
+            AddScore(blockScore);
             string s = string.Format("+{0}", blockScore);
             ShowScoreFX(s, t.transform);
         }

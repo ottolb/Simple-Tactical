@@ -42,7 +42,7 @@ namespace Game.Event
             /// <summary>
             /// Dispatch to setup other sub controllers
             /// </summary>
-            public const string Setup = "Game.Load";
+            public const string Setup = "Game.Setup";
 
             /// <summary>
             /// When game can be started.
@@ -71,6 +71,12 @@ namespace Game.Event
 
         public class Level
         {
+            public const string RequestPlayerSP = "Level.RequestPlayerSP";
+            public const string SetPlayerSP = "Level.SetPlayerSP";
+
+            public const string RequestNPC_SP = "Level.RequestNPC_SP";
+            public const string SetNPC_SP = "Level.SetNPC_SP";
+
             public const string Load = "Level.Load";
             public const string Clean = "Level.Clean";
             public const string Passed = "Level.Passed";

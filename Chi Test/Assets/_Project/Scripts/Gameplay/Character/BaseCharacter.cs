@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Gameplay
 {
@@ -8,7 +9,12 @@ namespace Game.Gameplay
     {
         public float life;
         public float speed;
+        NavMeshAgent _navMeshAgent;
 
+        void Awake()
+        {
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
         // Start is called before the first frame update
         void Start()

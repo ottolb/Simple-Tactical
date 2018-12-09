@@ -12,9 +12,6 @@ namespace Game.UI
         private GameObject recordCtr;
         private TextMeshProUGUI score, levelProgressT;
 
-        public Slider levelSlider;
-        public Text levelTexS;
-
         float levelProgress;
 
         protected override void Awake()
@@ -24,9 +21,6 @@ namespace Game.UI
             levelProgressT = transform.Find("Level Progress T").GetComponent<TextMeshProUGUI>();
             score = transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
 
-            levelSlider.minValue = 1;
-            levelSlider.maxValue = Level.LevelController.LevelSplitCount;
-            levelSlider.onValueChanged.AddListener(OnSliderChanged);
         }
 
         private void Start()
@@ -61,13 +55,6 @@ namespace Game.UI
         void OnLeaderboardsClicked(ButtonView p_button)
         {
             EventUIManager.TriggerEvent(NUI.Home.ShowLeaderboards);
-        }
-
-        void OnSliderChanged(float p_value)
-        {
-            int levelId = (int)p_value;
-            EventUIManager.TriggerEvent(NUI.EndGame.LevelSlider, levelId);
-            levelTexS.text = levelId.ToString();
         }
     }
 }

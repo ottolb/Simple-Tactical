@@ -11,7 +11,6 @@ namespace Game.UI
     public class HUD : BaseUI
     {
         private TextMeshProUGUI scoreT, levelPassedT, blocksT, moreBlocksT;
-        private LevelBarWidget levelBarWidget;
 
 
         private Image fadeImg;
@@ -24,8 +23,6 @@ namespace Game.UI
             fadeImg = transform.Find("Bkg").GetComponent<Image>();
             fadeAnim = fadeImg.GetComponent<DOTweenAnimation>();
 
-            Transform t = transform.Find("Top/Level Bar");
-            levelBarWidget = t.GetComponent<LevelBarWidget>();
 
             scoreT = transform.Find("Top/Score T").GetComponent<TextMeshProUGUI>();
 
@@ -79,7 +76,7 @@ namespace Game.UI
             fadeAnim.DORestartById("FadeIn");
             anim.Play("Level Passed", 0, 0);
             anim.SetInteger("star", ScoreController.Instance.starsPicked);
-            levelPassedT.text = string.Format("Level {0} Passed!", Level.LevelController.CurrentLevel + 1);
+            //levelPassedT.text = string.Format("Level {0} Passed!", Level.LevelController.CurrentLevel + 1);
         }
 
         public void FadeOut()

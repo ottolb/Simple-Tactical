@@ -30,7 +30,6 @@ namespace Game
         void OnPlayClicked(object p_data)
         {
             LoadGame();
-            this.WaitForSecondsAndDo(0.5f, StartGame);
         }
 
         void OnRestartClicked(object p_data)
@@ -41,6 +40,12 @@ namespace Game
         void LoadGame()
         {
             EventManager.TriggerEvent(N.Game.Load);
+
+            //todo: should wait for other components initialization events...
+            EventManager.TriggerEvent(N.Game.Setup);
+
+            //Add a short delay to start the game
+            this.WaitForSecondsAndDo(0.5f, StartGame);
         }
 
         void StartGame()

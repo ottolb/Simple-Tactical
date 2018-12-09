@@ -12,7 +12,11 @@ namespace Game.Gameplay
 
         public int turnPriority;
 
+        public int totalUnits;
+
         protected bool isPlaying, isMyTurn;
+
+        protected List<BaseCharacter> units;
 
 
         protected virtual void Start()

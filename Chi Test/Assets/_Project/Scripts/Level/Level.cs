@@ -10,106 +10,53 @@ namespace Game.Level
     public class Level : MonoBehaviour
     {
 
-        private List<Transform> blockSpawnPoints;
-        private List<Transform> blockAvailablePoints;
+        private List<Transform> playerSpawnPoints;
+        private List<Transform> playerAvailablePoints;
 
-        private List<Transform> hazardSpawnPoints;
-        private List<Transform> hazardAvailablePoints;
+        private List<Transform> enemySpawnPoints;
+        private List<Transform> enemyAvailablePoints;
 
 
-
-        public GameObject block, hazard, moreBlocksPW;
-
-        float minHazardScale, maxHazardScale;
-
-        public GameObject extraBlockSpawnPrefab;
 
         // Use this for initialization
         void Start()
         {
-            blockSpawnPoints = GameObject.Find("Spawn Points").transform.GetChilds();
-            hazardSpawnPoints = GameObject.Find("Scenario/Hazard Spawn Points").transform.GetChilds();
+            EventManager.StartListening(N.Level.RequestPlayerSP, OnRequestPlayerSpawnPoint);
+            EventManager.StartListening(N.Level.RequestNPC_SP, OnRequestPlayerSpawnPoint);
         }
 
-        public void Load(float p_blocks, float p_hazards)
+        public void Load()
         {
-            Debug.LogFormat("#Level# Blocks {0}   Hazards {1}", p_blocks, p_hazards);
-            Clean();
+            playerSpawnPoints = GameObject.Find("Player Spawn Points").transform.GetChilds();
+            enemySpawnPoints = GameObject.Find("NPC Spawn Points").transform.GetChilds();
 
-            FillBlocks(Mathf.RoundToInt(p_blocks));
-            FillHazards(Mathf.RoundToInt(p_hazards));
-            //EventManager.TriggerEvent(N.Level.ChangeBackgroundMaterial, setup.backgroundMtl);
+
         }
 
-        void FillBlocks(int p_amount)
+        void OnRequestPlayerSpawnPoint(object p_data)
         {
-            for (int i = 0; i < p_amount; i++)
-            {
-                var go = Spawn(block, blockAvailablePoints[0].position);
-                go.transform.localEulerAngles = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
-
-                blockAvailablePoints.RemoveAt(0);
-            }
+            EventManager.TriggerEvent(N.Level.SetPlayerSP, GetSPTransform(playerAvailablePoints));
         }
 
-        void FillHazards(int p_amount)
+        void OnRequestNPCSpawnPoint(object p_data)
         {
-            for (int i = 0; i < p_amount; i++)
-            {
-                var go = Spawn(hazard, hazardAvailablePoints[0].position);
-                go.transform.parent = GameObject.Find("Scenario").transform;
-                go.transform.SetPositionY(1.6011f);
-                go.transform.rotation = hazardAvailablePoints[0].transform.rotation;
-                go.transform.SetScaleZ(minHazardScale + Random.Range(minHazardScale, maxHazardScale));
-
-                hazardAvailablePoints.RemoveAt(0);
-            }
+            EventManager.TriggerEvent(N.Level.SetNPC_SP, GetSPTransform(enemyAvailablePoints));
         }
 
-        public void SpawnPowerups(float p_hazards)
+        Transform GetSPTransform(List<Transform> p_points)
         {
-            Debug.LogFormat("#Level# SpawnPowerups {0} ", p_hazards);
-            for (int i = 0; i < p_hazards; i++)
-            {
-                var go = Spawn(moreBlocksPW, blockAvailablePoints[0].position);
-                go.transform.SetPositionY(2.0f);
-                blockAvailablePoints.RemoveAt(0);
-            }
-        }
-
-        public void SpawnExraBlock()
-        {
-            var go = Spawn(block, blockAvailablePoints[0].position);
-            go.transform.localEulerAngles = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
-            go.GetComponent<BaseBlock>().CreatedOnMatch(1f);
-
-
-            GameObject particle = CFX_SpawnSystem.GetNextObject(extraBlockSpawnPrefab);
-            particle.transform.position = blockAvailablePoints[0].position;
-
-            blockAvailablePoints.RemoveAt(0);
-        }
-
-        GameObject Spawn(GameObject prefab, Vector3 position)
-        {
-            GameObject go = CFX_SpawnSystem.GetNextObject(prefab);
-            go.transform.position = position;
-            return go;
-        }
-
-        public void SetHazardScale(float p_minHazardScale, float p_maxHazardScale)
-        {
-            minHazardScale = p_minHazardScale;
-            maxHazardScale = p_maxHazardScale;
+            Transform p = p_points[0];
+            p_points.RemoveAt(0);
+            return p;
         }
 
         void Clean()
         {
-            blockAvailablePoints = new List<Transform>(blockSpawnPoints);
-            blockAvailablePoints = ConversorUtil.Randomize(blockAvailablePoints);
+            playerAvailablePoints = new List<Transform>(playerSpawnPoints);
+            playerAvailablePoints = ConversorUtil.Randomize(playerAvailablePoints);
 
-            hazardAvailablePoints = new List<Transform>(hazardSpawnPoints);
-            hazardAvailablePoints = ConversorUtil.Randomize(hazardAvailablePoints);
+            enemyAvailablePoints = new List<Transform>(enemySpawnPoints);
+            enemyAvailablePoints = ConversorUtil.Randomize(enemyAvailablePoints);
         }
     }
 }
