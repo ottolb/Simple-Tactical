@@ -60,7 +60,7 @@ namespace Game
 
         protected override void ListenEvents()
         {
-            EventManager.StartListening(N.Block.Captured, OnBlockCaptured);
+            //EventManager.StartListening(N.Block.Captured, OnBlockCaptured);
 
             EventManager.StartListening(N.Score.CoinPick, OnCoinPick);
             EventManager.StartListening(N.Game.Start, OnGameStarted);
@@ -120,10 +120,10 @@ namespace Game
 
         void OnBlockCaptured(object p_block)
         {
-            Gameplay.BaseBlock t = (Gameplay.BaseBlock)p_block;
-            AddScore(blockScore);
-            string s = string.Format("+{0}", blockScore);
-            ShowScoreFX(s, t.transform);
+            //Gameplay.BaseBlock t = (Gameplay.BaseBlock)p_block;
+            //AddScore(blockScore);
+            //string s = string.Format("+{0}", blockScore);
+            //ShowScoreFX(s, t.transform);
         }
 
         void OnCoinPick(object p_star)

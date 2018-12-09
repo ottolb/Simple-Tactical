@@ -554,30 +554,25 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8751520044579715456, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 24.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174422868946723516, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 24.14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174422868946723516, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
+    - target: {fileID: 8425518457085000762, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -31.40039
+      value: -108.23999
       objectReference: {fileID: 0}
-    - target: {fileID: 8174422868946723516, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
+    - target: {fileID: 8425518457085000762, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.6699219
+      value: 37.79001
       objectReference: {fileID: 0}
-    - target: {fileID: 224320737386209882, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
+    - target: {fileID: 8233124549342174594, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 92.09958
+      value: -108.23999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8233124549342174594, guid: 5a1eb3d0893a440f3967c4bc5a0b7863,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 37.79001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a1eb3d0893a440f3967c4bc5a0b7863, type: 3}
@@ -1482,9 +1477,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_ReferenceResolution: {x: 1280, y: 720}
+  m_ScreenMatchMode: 2
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

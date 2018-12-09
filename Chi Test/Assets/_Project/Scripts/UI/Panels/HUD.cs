@@ -10,7 +10,10 @@ namespace Game.UI
 {
     public class HUD : BaseUI
     {
-        private TextMeshProUGUI scoreT, levelPassedT, blocksT, moreBlocksT;
+        private TextMeshProUGUI playerTurnT, enemyTurnT;
+
+        private GameObject turnButtonsCtr;
+        private Button waitBt, endTurnBt;
 
 
         private Image fadeImg;
@@ -24,18 +27,17 @@ namespace Game.UI
             fadeAnim = fadeImg.GetComponent<DOTweenAnimation>();
 
 
-            scoreT = transform.Find("Top/Score T").GetComponent<TextMeshProUGUI>();
+            playerTurnT = transform.Find("Turn Info/Player Turn T").GetComponent<TextMeshProUGUI>();
+            enemyTurnT = transform.Find("Turn Info/Enemy Turn T").GetComponent<TextMeshProUGUI>();
 
-            levelPassedT = transform.Find("Level Passed/Text").GetComponent<TextMeshProUGUI>();
-
-            blocksT = transform.Find("Blocks T").GetComponent<TextMeshProUGUI>();
-            moreBlocksT = blocksT.transform.Find("MoreBlocks T").GetComponent<TextMeshProUGUI>();
+            turnButtonsCtr = transform.Find("Turn Buttons").gameObject;
+            waitBt = transform.Find("Turn Buttons/Wait Button").GetComponent<Button>();
+            endTurnBt = transform.Find("Turn Buttons/End Turn Button").GetComponent<Button>();
         }
 
         void Start()
         {
-            EventManager.StartListening(N.Game.Points, OnPointsSet);
-            EventManager.StartListening(N.Score.NewScore, OnScoreChanged);
+
         }
 
         public override void Show(bool p_animated)
@@ -46,37 +48,14 @@ namespace Game.UI
 
         public void Setup()
         {
-            scoreT.text = "0";
+
         }
 
-        void OnPointsSet(object p_data)
+        public void OnTurnChanged(bool p_playerTurn)
         {
-            int pts = (int)p_data;
-            scoreT.text = pts.ToString();
-        }
-
-        void OnScoreChanged(object p_score)
-        {
-            int s = (int)p_score;
-            scoreT.text = s.ToString();
-        }
-
-        public void OnBlocksChanged(int p_blocks)
-        {
-            blocksT.text = p_blocks.ToString();
-        }
-
-        public void OnMoreBlocksChanged(int p_blocks)
-        {
-            moreBlocksT.text = string.Format("+{0}", p_blocks);
-        }
-
-        public void LevelPassed()
-        {
-            fadeAnim.DORestartById("FadeIn");
-            anim.Play("Level Passed", 0, 0);
-            anim.SetInteger("star", ScoreController.Instance.starsPicked);
-            //levelPassedT.text = string.Format("Level {0} Passed!", Level.LevelController.CurrentLevel + 1);
+            playerTurnT.gameObject.SetActive(p_playerTurn);
+            enemyTurnT.gameObject.SetActive(!p_playerTurn);
+            turnButtonsCtr.SetActive(p_playerTurn);
         }
 
         public void FadeOut()

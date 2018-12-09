@@ -31,7 +31,7 @@ namespace Game.Level
             EventManager.StartListening(N.Game.Start, OnGameStart);
             EventManager.StartListening(N.Game.Over, OnGameOver);
 
-            EventManager.StartListening(N.Ball.Reset, OnPlayerReset);
+            EventManager.StartListening(N.Player.Reset, OnPlayerReset);
         }
 
         private void Update()

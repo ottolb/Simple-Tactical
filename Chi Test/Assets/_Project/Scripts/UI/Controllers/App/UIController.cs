@@ -33,18 +33,13 @@ namespace Game.UI
             EventManager.StartListening(N.Game.Over, OnGameOver);
             EventManager.StartListening(N.Level.NextLevel, OnLevelChanged);
 
-            EventManager.StartListening(N.Level.Passed, OnLevelPassed);
-
             EventUIManager.StartListening(NUI.Home.Continue, OnContinueClicked);
             EventUIManager.StartListening(NUI.Home.Play, OnPlayClicked);
             EventUIManager.StartListening(NUI.EndGame.Restart, OnRestartClicked);
 
             EventUIManager.StartListening(NUI.Home.ShowTutorial, OnShowTutorial);
 
-            EventManager.StartListening(N.Level.Progress, OnLevelProgress);
-
-            EventUIManager.StartListening(NUI.HUD.Blocks, OnBlocksChanged);
-            EventUIManager.StartListening(NUI.HUD.MoreBlocks, OnMoreBlocksChanged);
+            EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
         }
 
         void OnContinueClicked(object p_desc)
@@ -73,19 +68,6 @@ namespace Game.UI
                                 p);
             });
 
-
-
-            //int maxLevels = 50;//GameController.instance.levelUpConfig.levels.Length;
-            //float level = (int)GameController.GetLevelId();
-            //Debug.Log("GC Level " + level +  " / SM Level" + ScoreManager.Instance.Level);
-            //float progress = level / (float)maxLevels;
-            //Debug.Log("progress " + progress);
-            //endGameUI.SetLevelProgress(progress, (int)level + 1);
-
-            //progress = ScoreManager.Instance.HighLevel / (float)maxLevels;
-            //Debug.Log("progress " + progress);
-            //endGameUI.SetHighLevelProgress(progress, ScoreManager.Instance.HighLevel + 1);
-            //GameController.instance.enabled = false;
         }
 
         void OnLevelChanged(object p_data)
@@ -116,8 +98,6 @@ namespace Game.UI
             {
                 UICommonController.Instance.fadeUI.FadeOut();
             });
-
-
         }
 
         void OnShowTutorial(object p_null)
@@ -125,25 +105,11 @@ namespace Game.UI
             tutoUI.Show(false);
         }
 
-        void OnLevelPassed(object p_data)
+        void OnPlayerTurn(object p_blocks)
         {
-            hudUI.LevelPassed();
+            hudUI.OnTurnChanged(true);
         }
 
-        void OnLevelProgress(object p_progress)
-        {
-            levelProgress = ((float)p_progress);
-        }
-
-        void OnBlocksChanged(object p_blocks)
-        {
-            hudUI.OnBlocksChanged((int)p_blocks);
-        }
-
-        void OnMoreBlocksChanged(object p_blocks)
-        {
-            hudUI.OnMoreBlocksChanged((int)p_blocks);
-        }
         #region Properties
 
         private HUD _hudUI;
