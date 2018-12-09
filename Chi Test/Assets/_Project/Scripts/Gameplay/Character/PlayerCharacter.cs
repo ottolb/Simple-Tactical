@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Game.Event;
 using UnityEngine;
+using DG.Tweening;
+
 
 namespace Game.Gameplay
 {
@@ -10,11 +12,21 @@ namespace Game.Gameplay
         private GameObject selectParticle;
         private GameObject moveAreaParticle;
 
+        public GameObject moveIndicator;
+        private Material moveIndicatorMtl;
+
+        public Color movementAllowedColor, movementBlockedColor;
+
+        bool isSelected;
+        bool hasMoveEnergy;
+
         protected override void Awake()
         {
             base.Awake();
             selectParticle = transform.Find("Mesh/Selection").gameObject;
             moveAreaParticle = transform.Find("Mesh/Max Move Area").gameObject;
+
+            moveIndicatorMtl = moveIndicator.GetComponent<Renderer>().material;
 
             EventManager.StartListening(N.Player.HoverUnit, OnHoverUnit);
             EventManager.StartListening(N.Player.SelectUnit, OnUnitSelected);
@@ -28,28 +40,37 @@ namespace Game.Gameplay
             base.Init();
             selectParticle.SetActive(false);
             moveAreaParticle.SetActive(false);
+            moveIndicator.SetActive(false);
+
+            isSelected = false;
+            canMove = true;
+
         }
 
         void OnUnitSelected(object p_data)
         {
-            if (p_data as GameObject == gameObject)
+            if (p_data as Transform == transform)
             {
                 selectParticle.SetActive(true);
+                isSelected = true;
+
             }
             else
-                selectParticle.SetActive(false);
-
-            if (canMove)
             {
-                moveAreaParticle.SetActive(true);
+                isSelected = false;
+                selectParticle.SetActive(false);
             }
+
+            moveAreaParticle.SetActive(canMove && isSelected);
+            moveIndicator.SetActive(canMove && isSelected);
+
         }
 
         void OnHoverUnit(object p_data)
         {
-            if (p_data as GameObject == gameObject)
+            if (p_data as Transform == transform)
             {
-                Debug.Log("Color ");
+                //Debug.Log("Color ");
             }
             else
             {
@@ -59,13 +80,26 @@ namespace Game.Gameplay
 
         void OnMoveUnit(object p_data)
         {
-            Vector3 position = (Vector3)p_data;
-            _navMeshAgent.SetDestination(position);
+            if (isSelected)
+            {
+                Vector3 position = (Vector3)p_data;
+                _navMeshAgent.SetDestination(position);
+                canMove = false;
+                moveAreaParticle.SetActive(false);
+            }
         }
 
         void OnCheckUnitMovement(object p_data)
         {
+            if (!isSelected)
+                return;
 
+            Vector3 position = (Vector3)p_data;
+            moveIndicator.transform.position = position;
+            bool aux = Vector3.Distance(transform.position, position) > moveArea;
+            if (aux != hasMoveEnergy)
+                moveIndicatorMtl.DOColor(hasMoveEnergy ? movementAllowedColor : movementBlockedColor, 0.2f);
+            hasMoveEnergy = aux;
         }
     }
 }

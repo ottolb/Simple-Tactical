@@ -16,8 +16,6 @@ namespace Game.Gameplay
 
         public LayerMask floorLayerMask, unitSelectionLayerMask;
 
-        public GameObject cubeHitPos;
-
         public GameObject playerPrefab;
 
         bool isUnitSelected;
@@ -88,14 +86,14 @@ namespace Game.Gameplay
             {
                 var hitPosition = hit.point;
 
-                cubeHitPos.transform.position = hitPosition;
+                //cubeHitPos.transform.position = hitPosition;
 
                 if (_input.WasClicked())
                 {
                     EventManager.TriggerEvent(N.Player.MoveUnit, hitPosition);
                 }
                 else
-                    EventManager.TriggerEvent(N.Player.CheckUnitMovement, hit.collider.gameObject);
+                    EventManager.TriggerEvent(N.Player.CheckUnitMovement, hitPosition);
 
 
             }
@@ -110,12 +108,12 @@ namespace Game.Gameplay
             {
                 if (_input.WasClicked())
                 {
-                    EventManager.TriggerEvent(N.Player.SelectUnit, hit.collider.gameObject);
+                    EventManager.TriggerEvent(N.Player.SelectUnit, hit.collider.transform.parent);
                     isUnitSelected = true;
                     return true;
                 }
                 else
-                    EventManager.TriggerEvent(N.Player.HoverUnit, hit.collider.gameObject);
+                    EventManager.TriggerEvent(N.Player.HoverUnit, hit.collider.transform.parent);
             }
             return false;
         }

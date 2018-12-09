@@ -9,8 +9,12 @@ namespace Game.Gameplay
     {
         public float life;
         public float speed;
+        public float moveArea;
+
+        ///state properties
         public bool canMove;
         public bool canAttack;
+
         protected NavMeshAgent _navMeshAgent;
 
         protected virtual void Awake()
@@ -21,7 +25,7 @@ namespace Game.Gameplay
         // Start is called before the first frame update
         protected virtual void Start()
         {
-
+            Init();
         }
 
         // Update is called once per frame
