@@ -22,7 +22,7 @@ namespace Game.Level
         void Start()
         {
             EventManager.StartListening(N.Level.RequestPlayerSP, OnRequestPlayerSpawnPoint);
-            EventManager.StartListening(N.Level.RequestNPC_SP, OnRequestPlayerSpawnPoint);
+            EventManager.StartListening(N.Level.RequestNPC_SP, OnRequestNPCSpawnPoint);
         }
 
         public void Load()
@@ -30,7 +30,7 @@ namespace Game.Level
             playerSpawnPoints = GameObject.Find("Player Spawn Points").transform.GetChilds();
             enemySpawnPoints = GameObject.Find("NPC Spawn Points").transform.GetChilds();
 
-
+            Clean();
         }
 
         void OnRequestPlayerSpawnPoint(object p_data)

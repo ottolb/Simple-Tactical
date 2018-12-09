@@ -16,7 +16,7 @@ namespace Game.Level
 
         private void Awake()
         {
-            level = GetComponent<Level>();
+            level = GetComponentInChildren<Level>();
         }
 
         // Use this for initialization
