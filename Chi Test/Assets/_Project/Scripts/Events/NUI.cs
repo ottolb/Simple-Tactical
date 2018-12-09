@@ -34,8 +34,8 @@ namespace Game.Event
         public class HUD
         {
             public const string PlayerTurn = "HUD.PlayerTurn";
-            public const string Blocks = "HUD.Blocks";
-            public const string MoreBlocks = "HUD.MoreBlocks";
+            public const string NPCTurn = "HUD.NPCTurn";
+
             public const string SetActionButton = "HUD.SetActionButton";
             public const string EndTurn = "HUD.EndTurn";
             public const string WaitAction = "HUD.WaitAction";

@@ -38,6 +38,7 @@ namespace Game.Gameplay
             base.Init();
 
             isUnitSelected = false;
+            units = new List<BaseCharacter>();
             EventManager.StartListening(N.Level.SetPlayerSP, OnSpawnPointSet);
             for (int i = 0; i < totalUnits; i++)
             {
@@ -49,12 +50,21 @@ namespace Game.Gameplay
         {
             Transform point = (UnityEngine.Transform)p_data;
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
+            units.Add(go.GetComponent<BaseCharacter>());
         }
 
         protected override void StartTurn()
         {
             base.StartTurn();
+
+            foreach (var unit in units)
+            {
+                unit.Init();
+            }
+
             EventUIManager.TriggerEvent(NUI.HUD.PlayerTurn);
+
+            SelectUnit(units[0].transform);
         }
 
         void Update()
@@ -111,14 +121,19 @@ namespace Game.Gameplay
             {
                 if (_input.WasClicked())
                 {
-                    EventManager.TriggerEvent(N.Player.SelectUnit, hit.collider.transform.parent);
-                    isUnitSelected = true;
+                    SelectUnit(hit.collider.transform.parent);
                     return true;
                 }
                 else
                     EventManager.TriggerEvent(N.Player.HoverUnit, hit.collider.transform.parent);
             }
             return false;
+        }
+
+        void SelectUnit(Transform p_unit)
+        {
+            EventManager.TriggerEvent(N.Player.SelectUnit, p_unit);
+            isUnitSelected = true;
         }
 
         void OnBalanceUpdated(object p_data)

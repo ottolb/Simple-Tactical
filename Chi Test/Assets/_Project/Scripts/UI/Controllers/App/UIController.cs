@@ -40,6 +40,7 @@ namespace Game.UI
             EventUIManager.StartListening(NUI.Home.ShowTutorial, OnShowTutorial);
 
             EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
+            EventUIManager.StartListening(NUI.HUD.NPCTurn, OnNPCTurn);
             EventUIManager.StartListening(NUI.HUD.SetActionButton, OnUpdateActionButtons);
         }
 
@@ -109,6 +110,11 @@ namespace Game.UI
         void OnPlayerTurn(object p_unit)
         {
             hudUI.TurnChanged(true);
+        }
+
+        void OnNPCTurn(object p_unit)
+        {
+            hudUI.TurnChanged(false);
         }
 
         void OnUpdateActionButtons(object p_hasActions)

@@ -35,7 +35,7 @@ namespace Game.Gameplay
                 if (isWaiting)
                     return;
 
-                Debug.LogFormat("#Turn Controller# TurnChanged", unitsController[turnIndex].name);
+                Debug.LogFormat("#Turn Controller# Turn Changed to {0}", unitsController[turnIndex].name);
                 EventManager.TriggerEvent(N.Game.TurnChanged, unitsController[turnIndex]);
                 isWaiting = true;
             }
@@ -70,7 +70,7 @@ namespace Game.Gameplay
 
         void OnTurnFinished(object p_data)
         {
-            Debug.Log("#Turn Controller# Turn finished");
+            Debug.LogFormat("#Turn Controller# {0}'s turn finished", unitsController[turnIndex].name);
             isWaiting = false;
             turnIndex++;
             if (turnIndex >= unitsController.Count)
