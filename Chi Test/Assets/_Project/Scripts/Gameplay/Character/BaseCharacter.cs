@@ -9,7 +9,9 @@ namespace Game.Gameplay
     {
         public float life;
         public float speed;
-        NavMeshAgent _navMeshAgent;
+        public bool canMove;
+        public bool canAttack;
+        protected NavMeshAgent _navMeshAgent;
 
         protected virtual void Awake()
         {

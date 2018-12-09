@@ -96,6 +96,10 @@ namespace Game.Event
             public const string Reset = "Player.Reset";
 
             public const string SelectUnit = "Player.SelectUnit";
+            public const string HoverUnit = "Player.HoverUnit";
+
+            public const string CheckUnitMovement = "Player.CheckUnitMove";
+            public const string MoveUnit = "Player.MoveUnit";
         }
 
 
