@@ -33,7 +33,7 @@ namespace Game.Event
 
         public class HUD
         {
-            public const string slider = "HUD.slider";
+            public const string PlayerTurn = "HUD.PlayerTurn";
             public const string Blocks = "HUD.Blocks";
             public const string MoreBlocks = "HUD.MoreBlocks";
         }

@@ -90,37 +90,15 @@ namespace Game.Event
             public const string ChangeBackgroundMaterial = "Level.ChangeBackgroundMaterial";
         }
 
-        public class Ball
+        public class Player
         {
-            public const string Died = "Ball.Died";
-            public const string Reset = "Ball.Reset";
+            public const string Died = "Player.Died";
+            public const string Reset = "Player.Reset";
+
+            public const string SelectUnit = "Player.SelectUnit";
         }
 
-        public class Powerup
-        {
-            public const string MoreBlocksPicked = "PW.MoreblocksPicked";
-            public const string StarsPicked = "PW.Stars";
-        }
 
-        public class Block
-        {
-            /// <summary>
-            /// Block spawned.
-            /// </summary>
-            public const string Created = "Block.Created";
-            /// <summary>
-            /// The disabled.
-            /// </summary>
-            public const string Disabled = "Block.Disabled";
-            /// <summary>
-            /// When block touches 'sea' collider.
-            /// </summary>
-            public const string Captured = "Block.Captured";
-            /// <summary>
-            /// Block touched a hazard.
-            /// </summary>
-            public const string Died = "Block.Died";
-        }
 
 
         public class Score

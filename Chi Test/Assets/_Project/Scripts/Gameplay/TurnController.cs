@@ -45,7 +45,7 @@ namespace Game.Gameplay
 
         void OnGameStarted(object p_data)
         {
-            isWaiting = true;
+            isWaiting = false;
             isPlaying = true;
             turnIndex = 0;
         }

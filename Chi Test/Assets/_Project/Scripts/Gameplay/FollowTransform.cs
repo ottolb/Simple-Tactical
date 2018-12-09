@@ -27,7 +27,7 @@ namespace Game
 
         private void Start()
         {
-            EventManager.StartListening(N.Ball.Reset, BallPlaced);
+            EventManager.StartListening(N.Player.Reset, BallPlaced);
             EventManager.StartListening(N.Level.Load, OnGameStart);
             EventManager.StartListening(N.Game.Start, OnGameStart);
             EventManager.StartListening(N.Game.Over, OnGameOver);
