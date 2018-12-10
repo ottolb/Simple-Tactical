@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3677601011647594591}
   - component: {fileID: 3677601011647594590}
   - component: {fileID: 3677601011647594585}
+  - component: {fileID: 5360817066419067881}
   m_Layer: 0
   m_Name: Life Widget
   m_TagString: Untagged
@@ -172,6 +173,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimVector: 0
   cameraToLook: {fileID: 0}
+--- !u!114 &5360817066419067881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3677601011647594587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deafce90d318041dbbaa0ad3727e6dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedBarFx: 2
 --- !u!1 &3677601011652508668
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +198,7 @@ GameObject:
   - component: {fileID: 3677601011652508611}
   - component: {fileID: 3677601011652508610}
   m_Layer: 0
-  m_Name: TextMeshPro Text
+  m_Name: Life Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

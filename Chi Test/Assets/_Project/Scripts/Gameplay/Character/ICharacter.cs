@@ -13,7 +13,7 @@ namespace Game.Gameplay
 
         void Attack(BaseCharacter p_target);
 
-        void TakeDamage(float p_amount);
+        void TakeDamage(int p_amount);
 
     }
 }

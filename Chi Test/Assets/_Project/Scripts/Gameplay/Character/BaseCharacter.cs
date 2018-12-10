@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.UI;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,12 +11,12 @@ namespace Game.Gameplay
         public int totalActions;
         public int availableActios;
 
-        public float life;
-        protected float currentLife;
+        public int life;
+        protected int currentLife;
         public float speed;
         public float moveArea;
 
-        public float attackForce;
+        public int attackForce;
         public float attackRange;
 
         ///state properties
@@ -25,12 +26,13 @@ namespace Game.Gameplay
 
         protected NavMeshAgent _navMeshAgent;
         protected CharacterMesh _mesh;
-
+        protected LifeBarWidget _lifeBarWidget;
 
         protected virtual void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _mesh = GetComponentInChildren<CharacterMesh>();
+            _lifeBarWidget = GetComponentInChildren<LifeBarWidget>();
             name = name.Replace("(Clone)", Random.Range(0, 1000).ToString());
         }
 
@@ -56,7 +58,7 @@ namespace Game.Gameplay
             availableActios = totalActions;
             isWaiting = false;
             _mesh.StopOutline();
-            currentLife = life;
+            CurrentLife = life;
         }
 
         public virtual void Move(Vector3 p_point)
@@ -86,10 +88,10 @@ namespace Game.Gameplay
             p_target.TakeDamage(attackForce);
         }
 
-        public virtual void TakeDamage(float p_amount)
+        public virtual void TakeDamage(int p_amount)
         {
-            currentLife -= p_amount;
-            if (currentLife <= 0)
+            CurrentLife -= p_amount;
+            if (CurrentLife <= 0)
             {
                 _mesh.Die();
             }
@@ -102,6 +104,19 @@ namespace Game.Gameplay
         protected bool HasMoveEnergy(Vector3 p_target)
         {
             return Vector3.Distance(transform.position, p_target) > moveArea;
+        }
+
+        protected int CurrentLife
+        {
+            set
+            {
+                currentLife = value;
+                _lifeBarWidget.UpdateLife(currentLife, life);
+            }
+            get
+            {
+                return currentLife;
+            }
         }
     }
 }
