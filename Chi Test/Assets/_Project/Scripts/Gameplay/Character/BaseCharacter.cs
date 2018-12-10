@@ -14,6 +14,9 @@ namespace Game.Gameplay
         public float speed;
         public float moveArea;
 
+        public float attackForce;
+        public float attackRange;
+
         ///state properties
         public bool canMove;
         public bool canAttack;
@@ -61,9 +64,24 @@ namespace Game.Gameplay
             availableActios--;
         }
 
-        public virtual void Attack(float p_power)
+        /// <summary>
+        /// Checks if unit is near to attack the target
+        /// </summary>
+        /// <returns><c>true</c>, if distance is less than Attack Range, <c>false</c> otherwise.</returns>
+        /// <param name="p_target">P target.</param>
+        public virtual bool CheckAttack(BaseCharacter p_target)
+        {
+            //Calc distance
+            float distance = Vector3.Distance(p_target.transform.position, transform.position);
+
+            return distance < p_target.attackRange;
+        }
+
+        public virtual void Attack(BaseCharacter p_target)
         {
             availableActios--;
+
+            p_target.TakeDamage(attackForce);
         }
 
         public virtual void TakeDamage(float p_amount)

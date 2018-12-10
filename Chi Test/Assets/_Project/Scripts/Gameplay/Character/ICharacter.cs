@@ -11,7 +11,7 @@ namespace Game.Gameplay
 
         void Die();
 
-        void Attack(float p_power);
+        void Attack(BaseCharacter p_target);
 
         void TakeDamage(float p_amount);
 

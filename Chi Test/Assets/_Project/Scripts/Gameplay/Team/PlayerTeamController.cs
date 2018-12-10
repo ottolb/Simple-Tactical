@@ -78,19 +78,14 @@ namespace Game.Gameplay
 
         void Update()
         {
-            if (!isPlaying)
+            if (!isPlaying || !isMyTurn)
             {
                 return;
             }
 
-            if (isMyTurn)
+            if (CheckUnitSelection())
             {
-                if (CheckUnitSelection())
-                {
-                    return;
-                }
-                //isMyTurn = false;
-                //EventManager.TriggerEvent(N.Game.TurnFinished, this);
+                return;
             }
 
             if (isUnitSelected && CheckMoveRequest())
@@ -130,7 +125,16 @@ namespace Game.Gameplay
             {
                 if (_input.WasClicked())
                 {
-                    SelectUnit(hit.collider.GetComponentInParent<BaseCharacter>());
+                    BaseCharacter character = hit.collider.GetComponentInParent<BaseCharacter>();
+                    if (units.Contains(character))
+                    {
+                        SelectUnit(character);
+                    }
+                    else
+                    {
+                        AttackEnemy(character);
+                    }
+
                     return true;
                 }
                 else
@@ -164,6 +168,16 @@ namespace Game.Gameplay
                 SelectUnit(unit);
 
             EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit == null);
+        }
+
+        void AttackEnemy(BaseCharacter p_unit)
+        {
+            //selectedUnit.Attack()
+            Debug.LogFormat("#Character# Character {0} will attack {1}", selectedUnit.name, p_unit.name);
+            if (selectedUnit.CheckAttack(p_unit))
+                selectedUnit.Attack(p_unit);
+            else
+                Debug.LogFormat("#Character# Character {0} is far to attack {1}", selectedUnit.name, p_unit.name);
         }
     }
 }
