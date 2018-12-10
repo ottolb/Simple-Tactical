@@ -15,7 +15,6 @@ namespace Game.Gameplay
 
         public List<BaseCharacter> playerUnits;
 
-        private BaseCharacter selectedUnit;
 
         protected override void Start()
         {
@@ -59,8 +58,7 @@ namespace Game.Gameplay
 
             EventUIManager.TriggerEvent(NUI.HUD.NPCTurn);
 
-            selectedUnit = units[0];
-            SelectUnit(selectedUnit.transform);
+            SelectUnit(selectedUnit);
 
             FindNearestPlayerUnit();
 

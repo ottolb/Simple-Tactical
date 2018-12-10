@@ -61,7 +61,7 @@ namespace Game.UI
 
         void OnGameOver(object p_desc)
         {
-            int p = (int)(levelProgress * 100);
+            int p = 0;//(int)(levelProgress * 100);
             this.WaitForSecondsAndDo(0.5f, () =>
             {
                 hudUI.Hide(false);
