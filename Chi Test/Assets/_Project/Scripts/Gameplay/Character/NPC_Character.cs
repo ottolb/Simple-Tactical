@@ -21,8 +21,18 @@ namespace Game.Gameplay
         public override void Init()
         {
             base.Init();
-            canMove = true;
+            Setup(Random.Range(0, 1));
+        }
+
+        public override void StartTurn()
+        {
+            base.StartTurn();
             totalDistance = -1;
+        }
+
+        public void Setup(int p_charType)
+        {
+            _mesh.SetupCharacter(p_charType);
         }
 
         public override void Move(Vector3 p_point)

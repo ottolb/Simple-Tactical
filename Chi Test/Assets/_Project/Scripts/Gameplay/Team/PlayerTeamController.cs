@@ -42,9 +42,9 @@ namespace Game.Gameplay
             CreateUnits();
         }
 
-        void CreateUnits()
+        protected override void CreateUnits()
         {
-            units = new List<BaseCharacter>();
+            base.CreateUnits();
             EventManager.StartListening(N.Level.SetPlayerSP, OnSpawnPointSet);
             for (int i = 0; i < totalUnits; i++)
             {
@@ -59,7 +59,8 @@ namespace Game.Gameplay
             Transform point = (UnityEngine.Transform)p_data;
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
             units.Add(go.GetComponent<BaseCharacter>());
-            (units[units.Count - 1] as PlayerCharacter).Setup(Random.Range(0, 1));
+            //(units[units.Count - 1] as PlayerCharacter).Setup(Random.Range(0, 1));
+            units[units.Count - 1].Init();
         }
 
         protected override void StartTurn()
@@ -68,7 +69,7 @@ namespace Game.Gameplay
 
             foreach (var unit in units)
             {
-                unit.Init();
+                unit.StartTurn();
             }
 
             EventUIManager.TriggerEvent(NUI.HUD.PlayerTurn);

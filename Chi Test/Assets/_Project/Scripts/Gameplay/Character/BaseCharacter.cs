@@ -55,11 +55,17 @@ namespace Game.Gameplay
 
         public virtual void Init()
         {
-            availableActios = totalActions;
-            isWaiting = false;
-            _mesh.StopOutline();
             CurrentLife = life;
         }
+
+        public virtual void StartTurn()
+        {
+            availableActios = totalActions;
+            isWaiting = false;
+            canMove = true;
+            _mesh.StopOutline();
+        }
+
 
         public virtual void Move(Vector3 p_point)
         {

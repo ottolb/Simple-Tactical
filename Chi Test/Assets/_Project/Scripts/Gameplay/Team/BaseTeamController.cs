@@ -71,5 +71,10 @@ namespace Game.Gameplay
             isUnitSelected = true;
         }
 
+        protected virtual void CreateUnits()
+        {
+            units = new List<BaseCharacter>();
+        }
+
     }
 }

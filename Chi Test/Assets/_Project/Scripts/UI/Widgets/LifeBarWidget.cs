@@ -21,7 +21,7 @@ namespace Game.UI
         {
             Transform t = transform;
             lifeT = t.Find("Life Text").GetComponent<TextMeshProUGUI>();
-            lifeBar = t.Find("Life Bar/Fill").GetComponent<Image>();
+            lifeBar = t.Find("Life Bar/Filler").GetComponent<Image>();
 
             //EventManager.StartListening(N.Game.Start, OnGameStarted);
             //EventManager.StartListening(N.Level.Load, OnLevelLoaded);
@@ -40,7 +40,7 @@ namespace Game.UI
             if (barTween != null)
                 barTween.Complete();
 
-            float clamped = p_current / p_total;
+            float clamped = p_current / (float)p_total;
 
             barTween = DOTween.To(() => lifeBar.fillAmount, x => lifeBar.fillAmount = x, clamped, speedBarFx);
 

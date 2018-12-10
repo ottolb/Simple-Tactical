@@ -32,7 +32,12 @@ namespace Game.Gameplay
             base.Init();
 
             isUnitSelected = false;
-            units = new List<BaseCharacter>();
+            CreateUnits();
+        }
+
+        protected override void CreateUnits()
+        {
+            base.CreateUnits();
             EventManager.StartListening(N.Level.SetNPC_SP, OnSpawnPointSet);
             for (int i = 0; i < totalUnits; i++)
             {
@@ -45,6 +50,7 @@ namespace Game.Gameplay
             Transform point = (UnityEngine.Transform)p_data;
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
             units.Add(go.GetComponent<BaseCharacter>());
+            units[units.Count - 1].Init();
         }
 
         protected override void StartTurn()

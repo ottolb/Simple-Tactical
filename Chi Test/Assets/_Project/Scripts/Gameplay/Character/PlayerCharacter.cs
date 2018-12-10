@@ -38,13 +38,17 @@ namespace Game.Gameplay
         public override void Init()
         {
             base.Init();
+            Setup(Random.Range(0, 1));
+        }
+
+        public override void StartTurn()
+        {
+            base.StartTurn();
             selectParticle.SetActive(false);
             moveAreaParticle.SetActive(false);
             moveIndicator.SetActive(false);
 
             isSelected = false;
-            canMove = true;
-
         }
 
         public void Setup(int p_charType)

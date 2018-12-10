@@ -7,6 +7,8 @@ namespace Game.Gameplay
 
         void Init();
 
+        void StartTurn();
+
         void Move(Vector3 p_point);
 
         void Die();
