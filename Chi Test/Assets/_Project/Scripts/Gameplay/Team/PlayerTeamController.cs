@@ -189,7 +189,10 @@ namespace Game.Gameplay
             base.ActionTakenByUnit(p_unit);
             if (p_unit.AvailableActions == 0)
             {
-                SelecteNextUnit();
+                this.WaitForSecondsAndDo(0.8f, delegate
+                {
+                    SelecteNextUnit();
+                });
             }
         }
     }

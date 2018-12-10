@@ -65,12 +65,8 @@ namespace Game.Gameplay
                 selectParticle.SetActive(true);
                 isSelected = true;
 
+                UpdateActions();
                 EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
-
-                Dictionary<string, int> dict = new Dictionary<string, int>();
-                dict["total"] = totalActions;
-                dict["current"] = AvailableActions;
-                EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
             }
             else
             {
@@ -118,6 +114,7 @@ namespace Game.Gameplay
             moveAreaParticle.SetActive(false);
             moveIndicator.SetActive(false);
 
+            UpdateActions();
             Debug.LogFormat("#Character# Character {0} moved ", name);
         }
 
@@ -134,7 +131,21 @@ namespace Game.Gameplay
             hasMoveEnergy = !aux;
         }
 
+        public override void Attack(BaseCharacter p_target)
+        {
+            base.Attack(p_target);
+            UpdateActions();
+        }
 
+        private void UpdateActions()
+        {
+            Dictionary<string, int> dict = new Dictionary<string, int>
+            {
+                ["total"] = totalActions,
+                ["current"] = AvailableActions
+            };
+            EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
+        }
 
     }
 }

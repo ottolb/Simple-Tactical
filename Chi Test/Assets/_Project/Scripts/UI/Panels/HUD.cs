@@ -71,6 +71,7 @@ namespace Game.UI
         {
             actionT.text = string.Format("{0}/{1}", p_current, p_total);
         }
+
         public void FadeOut()
         {
             fadeAnim.DORestartById("FadeOut");
