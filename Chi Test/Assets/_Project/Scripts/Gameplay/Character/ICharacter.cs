@@ -1,11 +1,13 @@
-﻿namespace Game.Gameplay
+﻿using UnityEngine;
+
+namespace Game.Gameplay
 {
     public interface ICharacter
     {
 
         void Init();
 
-        void Move();
+        void Move(Vector3 p_point);
 
         void Die();
 

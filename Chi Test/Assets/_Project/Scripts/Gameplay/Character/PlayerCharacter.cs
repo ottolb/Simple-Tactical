@@ -28,11 +28,11 @@ namespace Game.Gameplay
 
             moveIndicatorMtl = moveIndicator.GetComponent<Renderer>().material;
 
-            EventManager.StartListening(N.Player.HoverUnit, OnHoverUnit);
-            EventManager.StartListening(N.Player.SelectUnit, OnUnitSelected);
+            EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
+            EventManager.StartListening(N.Unit.SelectUnit, OnUnitSelected);
 
-            EventManager.StartListening(N.Player.MoveUnit, OnMoveUnit);
-            EventManager.StartListening(N.Player.CheckUnitMovement, OnCheckUnitMovement);
+            EventManager.StartListening(N.Unit.MoveUnit, OnMoveUnit);
+            EventManager.StartListening(N.Unit.CheckUnitMovement, OnCheckUnitMovement);
 
             EventUIManager.StartListening(NUI.HUD.WaitAction, OnWaitAction);
         }
@@ -58,6 +58,11 @@ namespace Game.Gameplay
                 selectParticle.SetActive(true);
                 isSelected = true;
                 EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
+
+                Dictionary<string, int> dict = new Dictionary<string, int>();
+                dict["total"] = totalActions;
+                dict["current"] = availableActios;
+                EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
             }
             else
             {
@@ -89,18 +94,22 @@ namespace Game.Gameplay
                 if (hasMoveEnergy)
                 {
                     Vector3 position = (Vector3)p_data;
-                    _navMeshAgent.SetDestination(position);
-                    canMove = false;
-                    moveAreaParticle.SetActive(false);
-                    moveIndicator.SetActive(false);
-
-                    Debug.LogFormat("#Character# Character {0} moved ", name);
+                    Move(position);
                 }
                 else
                 {
                     Debug.LogFormat("#Character# Character {0} is too far away from destination point ", name);
                 }
             }
+        }
+
+        public override void Move(Vector3 p_point)
+        {
+            base.Move(p_point);
+            moveAreaParticle.SetActive(false);
+            moveIndicator.SetActive(false);
+
+            Debug.LogFormat("#Character# Character {0} moved ", name);
         }
 
         void OnCheckUnitMovement(object p_data)

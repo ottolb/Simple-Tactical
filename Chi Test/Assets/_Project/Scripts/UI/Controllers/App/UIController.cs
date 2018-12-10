@@ -19,8 +19,7 @@ namespace Game.UI
 
     public class UIController : BaseUIController
     {
-        float levelProgress;
-
+        \
         protected override void Awake()
         {
             base.Awake();
@@ -42,6 +41,8 @@ namespace Game.UI
             EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
             EventUIManager.StartListening(NUI.HUD.NPCTurn, OnNPCTurn);
             EventUIManager.StartListening(NUI.HUD.SetActionButton, OnUpdateActionButtons);
+
+
         }
 
         void OnContinueClicked(object p_desc)
@@ -121,6 +122,12 @@ namespace Game.UI
         {
             bool hasAction = (bool)p_hasActions;
             hudUI.UpdateActionButtons(hasAction);
+        }
+
+        void OnSetAvailableActions(object p_hasActions)
+        {
+            Dictionary<string, int> dict = (Dictionary<string, int>)p_hasActions;
+            hudUI.SetRemainingActions(dict["current"], dict["total"]);
         }
 
 

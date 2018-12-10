@@ -15,6 +15,7 @@ namespace Game.UI
         private GameObject turnButtonsCtr;
         private Button waitBt, endTurnBt;
 
+        private TextMeshProUGUI actionT;
 
         private Image fadeImg;
         private DOTweenAnimation fadeAnim;
@@ -33,6 +34,8 @@ namespace Game.UI
             turnButtonsCtr = transform.Find("Turn Buttons").gameObject;
             waitBt = transform.Find("Turn Buttons/Wait Button").GetComponent<Button>();
             endTurnBt = transform.Find("Turn Buttons/End Turn Button").GetComponent<Button>();
+
+            actionT = transform.Find("Actions Info/Amount T").GetComponent<TextMeshProUGUI>();
         }
 
         void Start()
@@ -64,6 +67,10 @@ namespace Game.UI
             endTurnBt.gameObject.SetActive(!p_hasAction);
         }
 
+        public void SetRemainingActions(int p_current, int p_total)
+        {
+            actionT.text = string.Format("{0}/{1}", p_current, p_total);
+        }
         public void FadeOut()
         {
             fadeAnim.DORestartById("FadeOut");

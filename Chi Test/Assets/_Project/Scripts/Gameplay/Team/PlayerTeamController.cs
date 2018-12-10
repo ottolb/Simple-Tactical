@@ -18,7 +18,7 @@ namespace Game.Gameplay
 
         public GameObject playerPrefab;
 
-        bool isUnitSelected;
+
 
 
 
@@ -38,12 +38,19 @@ namespace Game.Gameplay
             base.Init();
 
             isUnitSelected = false;
+            CreateUnits();
+        }
+
+        void CreateUnits()
+        {
             units = new List<BaseCharacter>();
             EventManager.StartListening(N.Level.SetPlayerSP, OnSpawnPointSet);
             for (int i = 0; i < totalUnits; i++)
             {
                 EventManager.TriggerEvent(N.Level.RequestPlayerSP);
             }
+
+            EventManager.TriggerEvent(N.Unit.PlayerUnits, units);
         }
 
         void OnSpawnPointSet(object p_data)
@@ -103,10 +110,10 @@ namespace Game.Gameplay
 
                 if (_input.WasClicked())
                 {
-                    EventManager.TriggerEvent(N.Player.MoveUnit, hitPosition);
+                    EventManager.TriggerEvent(N.Unit.MoveUnit, hitPosition);
                 }
                 else
-                    EventManager.TriggerEvent(N.Player.CheckUnitMovement, hitPosition);
+                    EventManager.TriggerEvent(N.Unit.CheckUnitMovement, hitPosition);
 
 
             }
@@ -125,15 +132,9 @@ namespace Game.Gameplay
                     return true;
                 }
                 else
-                    EventManager.TriggerEvent(N.Player.HoverUnit, hit.collider.transform.parent);
+                    EventManager.TriggerEvent(N.Unit.HoverUnit, hit.collider.transform.parent);
             }
             return false;
-        }
-
-        void SelectUnit(Transform p_unit)
-        {
-            EventManager.TriggerEvent(N.Player.SelectUnit, p_unit);
-            isUnitSelected = true;
         }
 
         void OnBalanceUpdated(object p_data)

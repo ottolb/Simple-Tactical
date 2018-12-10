@@ -7,6 +7,9 @@ namespace Game.Gameplay
 {
     public class BaseCharacter : MonoBehaviour, ICharacter
     {
+        public int totalActions;
+        public int availableActios;
+
         public float life;
         public float speed;
         public float moveArea;
@@ -20,6 +23,7 @@ namespace Game.Gameplay
         protected virtual void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            name = name.Replace("(Clone)", Random.Range(0, 1000).ToString());
         }
 
         // Start is called before the first frame update
@@ -41,12 +45,13 @@ namespace Game.Gameplay
 
         public virtual void Init()
         {
-
+            availableActios = totalActions;
         }
 
-        public virtual void Move()
+        public virtual void Move(Vector3 p_point)
         {
-
+            _navMeshAgent.SetDestination(p_point);
+            canMove = false;
         }
 
         public virtual void TakeDamage(float p_amount)

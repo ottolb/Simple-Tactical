@@ -14,7 +14,7 @@ namespace Game.Gameplay
 
         public int totalUnits;
 
-        protected bool isPlaying, isMyTurn;
+        protected bool isPlaying, isMyTurn, isUnitSelected;
 
         protected List<BaseCharacter> units;
 
@@ -60,6 +60,12 @@ namespace Game.Gameplay
             {
                 StartTurn();
             }
+        }
+
+        protected virtual void SelectUnit(Transform p_unit)
+        {
+            EventManager.TriggerEvent(N.Unit.SelectUnit, p_unit);
+            isUnitSelected = true;
         }
 
     }

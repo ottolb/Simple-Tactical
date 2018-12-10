@@ -71,10 +71,25 @@ namespace Game.Event
 
         public class Level
         {
+            /// <summary>
+            /// Request an available Spawn Point for Player units
+            /// </summary>
             public const string RequestPlayerSP = "Level.RequestPlayerSP";
+
+            /// <summary>
+            /// When an available SP is found
+            /// </summary>
             public const string SetPlayerSP = "Level.SetPlayerSP";
 
+
+            /// <summary>
+            /// Request an available Spawn Point for NPC units
+            /// </summary>
             public const string RequestNPC_SP = "Level.RequestNPC_SP";
+
+            /// <summary>
+            /// When an available SP is found
+            /// </summary>
             public const string SetNPC_SP = "Level.SetNPC_SP";
 
             public const string Load = "Level.Load";
@@ -90,20 +105,22 @@ namespace Game.Event
             public const string ChangeBackgroundMaterial = "Level.ChangeBackgroundMaterial";
         }
 
-        public class Player
+        /// <summary>
+        /// Unit/Character events
+        /// </summary>
+        public class Unit
         {
-            public const string Died = "Player.Died";
-            public const string Reset = "Player.Reset";
+            public const string Died = "Unit.Died";
+            public const string Reset = "Unit.Reset";
 
-            public const string SelectUnit = "Player.SelectUnit";
-            public const string HoverUnit = "Player.HoverUnit";
+            public const string SelectUnit = "Unit.SelectUnit";
+            public const string HoverUnit = "Unit.HoverUnit";
 
-            public const string CheckUnitMovement = "Player.CheckUnitMove";
-            public const string MoveUnit = "Player.MoveUnit";
+            public const string CheckUnitMovement = "Unit.CheckUnitMove";
+            public const string MoveUnit = "Unit.MoveUnit";
+
+            public const string PlayerUnits = "Unit.PlayerUnits";
         }
-
-
-
 
         public class Score
         {

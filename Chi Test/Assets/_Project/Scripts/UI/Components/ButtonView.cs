@@ -4,41 +4,41 @@ using UnityEngine.UI;
 
 namespace Game.UI
 {
-	public class ButtonView : MonoBehaviour
-	{
-		[Tooltip ("The method name of the Base Canvas script that contains this panel")]
-		public string methodName;
+    public class ButtonView : MonoBehaviour
+    {
+        [Tooltip("The method name of the Base Canvas script that contains this panel")]
+        public string methodName;
 
-		[HideInInspector]
-		public UIButtonViewEvent evt;
-
-
-		void Awake ()
-		{
-			if (string.IsNullOrEmpty (methodName))
-				return;
-
-			Button button = GetComponent<Button> ();
-
-			UnityAction action = new UnityAction (OnClicked);
-
-			//add to button event listener
-			button.onClick.AddListener (action);
-		}
+        [HideInInspector]
+        public UIButtonViewEvent evt;
 
 
-		public void OnClicked ()
-		{
-			if (!enabled)
-				return;
-			if (Debug.isDebugBuild)
-				Debug.Log ("OnClicked: " + this.name);
-			evt.Invoke (this);
-		}
-	}
+        void Awake()
+        {
+            if (string.IsNullOrEmpty(methodName))
+                return;
 
-	[System.Serializable]
-	public class UIButtonViewEvent : UnityEvent<ButtonView>
-	{
-	}
+            Button button = GetComponent<Button>();
+
+            UnityAction action = new UnityAction(OnClicked);
+
+            //add to button event listener
+            button.onClick.AddListener(action);
+        }
+
+
+        public void OnClicked()
+        {
+            if (!enabled)
+                return;
+            if (Debug.isDebugBuild)
+                Debug.Log("#UI# OnClicked: " + this.name);
+            evt.Invoke(this);
+        }
+    }
+
+    [System.Serializable]
+    public class UIButtonViewEvent : UnityEvent<ButtonView>
+    {
+    }
 }

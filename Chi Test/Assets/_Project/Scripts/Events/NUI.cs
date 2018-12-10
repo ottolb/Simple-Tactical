@@ -39,6 +39,8 @@ namespace Game.Event
             public const string SetActionButton = "HUD.SetActionButton";
             public const string EndTurn = "HUD.EndTurn";
             public const string WaitAction = "HUD.WaitAction";
+
+            public const string SetAvailableActions = "HUD.SetAvailableActions";
         }
 
         /// <summary>

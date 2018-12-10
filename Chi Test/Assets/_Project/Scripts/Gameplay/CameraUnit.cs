@@ -30,11 +30,11 @@ namespace Game
         {
             EventManager.StartListening(N.Game.Start, OnGameStart);
             EventManager.StartListening(N.Game.Over, OnGameOver);
-            EventManager.StartListening(N.Player.SelectUnit, OnPlayerUnitSelected);
+            EventManager.StartListening(N.Unit.SelectUnit, OnUnitSelected);
             enabled = false;
         }
 
-        void OnPlayerUnitSelected(object p_unit)
+        void OnUnitSelected(object p_unit)
         {
             _target = (UnityEngine.Transform)p_unit;
             shouldLookAt = false;
