@@ -33,8 +33,6 @@ namespace Game.Gameplay
 
             EventManager.StartListening(N.Unit.MoveUnit, OnMoveUnit);
             EventManager.StartListening(N.Unit.CheckUnitMovement, OnCheckUnitMovement);
-
-            EventUIManager.StartListening(NUI.HUD.WaitAction, OnWaitAction);
         }
 
         public override void Init()
@@ -125,17 +123,7 @@ namespace Game.Gameplay
             hasMoveEnergy = !aux;
         }
 
-        void OnWaitAction(object p_data)
-        {
-            if (!isSelected)
-                return;
 
-            canAttack = false;
-            Debug.LogFormat("#Character# Character {0} won't attack ", name);
-
-            //todo: Team controller should handle that
-            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
-        }
 
     }
 }

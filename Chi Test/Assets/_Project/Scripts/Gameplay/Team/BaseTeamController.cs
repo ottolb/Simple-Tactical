@@ -18,6 +18,8 @@ namespace Game.Gameplay
 
         protected List<BaseCharacter> units;
 
+        protected BaseCharacter selectedUnit;
+
 
         protected virtual void Start()
         {
@@ -62,9 +64,10 @@ namespace Game.Gameplay
             }
         }
 
-        protected virtual void SelectUnit(Transform p_unit)
+        protected virtual void SelectUnit(BaseCharacter p_unit)
         {
-            EventManager.TriggerEvent(N.Unit.SelectUnit, p_unit);
+            selectedUnit = p_unit;
+            EventManager.TriggerEvent(N.Unit.SelectUnit, p_unit.transform);
             isUnitSelected = true;
         }
 

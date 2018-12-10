@@ -31,6 +31,7 @@ namespace Game.Gameplay
 
             //UI events
             EventUIManager.StartListening(NUI.HUD.EndTurn, OnPlayerTurnEndAction);
+            EventUIManager.StartListening(NUI.HUD.WaitAction, OnWaitAction);
         }
 
         protected override void Init()
@@ -71,7 +72,7 @@ namespace Game.Gameplay
 
             EventUIManager.TriggerEvent(NUI.HUD.PlayerTurn);
 
-            SelectUnit(units[0].transform);
+            SelectUnit(units[0]);
         }
 
         void Update()
@@ -128,7 +129,7 @@ namespace Game.Gameplay
             {
                 if (_input.WasClicked())
                 {
-                    SelectUnit(hit.collider.transform.parent);
+                    SelectUnit(hit.collider.GetComponentInParent<BaseCharacter>());
                     return true;
                 }
                 else
@@ -145,6 +146,23 @@ namespace Game.Gameplay
         void OnPlayerTurnEndAction(object p_data)
         {
             EventManager.TriggerEvent(N.Game.TurnFinished);
+        }
+
+        void OnWaitAction(object p_data)
+        {
+            selectedUnit.isWaiting = true;
+            Debug.LogFormat("#Character# Character {0} won't attack ", selectedUnit.name);
+
+
+            BaseCharacter unit = units.Find(delegate (BaseCharacter p_unit)
+            {
+                return !p_unit.isWaiting;
+            });
+
+            if (unit)
+                SelectUnit(unit);
+
+            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit == null);
         }
     }
 }

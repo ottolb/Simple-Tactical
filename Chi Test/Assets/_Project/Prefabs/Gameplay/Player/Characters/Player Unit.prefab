@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817456fe842c34b969639f1784c4b261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalActions: 2
+  availableActios: 0
   life: 100
   speed: 1
   moveArea: 6

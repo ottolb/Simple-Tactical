@@ -17,6 +17,7 @@ namespace Game.Gameplay
         ///state properties
         public bool canMove;
         public bool canAttack;
+        public bool isWaiting;
 
         protected NavMeshAgent _navMeshAgent;
 
@@ -46,12 +47,19 @@ namespace Game.Gameplay
         public virtual void Init()
         {
             availableActios = totalActions;
+            isWaiting = false;
         }
 
         public virtual void Move(Vector3 p_point)
         {
             _navMeshAgent.SetDestination(p_point);
             canMove = false;
+            availableActios--;
+        }
+
+        public virtual void Attack(float p_power)
+        {
+            availableActios--;
         }
 
         public virtual void TakeDamage(float p_amount)

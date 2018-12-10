@@ -11,6 +11,8 @@ namespace Game.Gameplay
 
         void Die();
 
+        void Attack(float p_power);
+
         void TakeDamage(float p_amount);
 
     }
