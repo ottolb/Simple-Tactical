@@ -120,6 +120,8 @@ namespace Game.Event
             public const string MoveUnit = "Unit.MoveUnit";
 
             public const string PlayerUnits = "Unit.PlayerUnits";
+
+            public const string ActionTaken = "Unit.ActionTaken";
         }
 
         public class Score

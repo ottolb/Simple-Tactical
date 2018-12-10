@@ -69,7 +69,7 @@ namespace Game.Gameplay
 
                 Dictionary<string, int> dict = new Dictionary<string, int>();
                 dict["total"] = totalActions;
-                dict["current"] = availableActios;
+                dict["current"] = AvailableActions;
                 EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
             }
             else

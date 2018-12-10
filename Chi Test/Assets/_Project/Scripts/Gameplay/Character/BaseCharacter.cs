@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Event;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +10,7 @@ namespace Game.Gameplay
     public class BaseCharacter : MonoBehaviour, ICharacter
     {
         public int totalActions;
-        public int availableActios;
+        private int _availableActios;
 
         public int life;
         protected int currentLife;
@@ -60,7 +61,7 @@ namespace Game.Gameplay
 
         public virtual void StartTurn()
         {
-            availableActios = totalActions;
+            AvailableActions = totalActions;
             isWaiting = false;
             canMove = true;
             _mesh.StopOutline();
@@ -71,7 +72,7 @@ namespace Game.Gameplay
         {
             _navMeshAgent.SetDestination(p_point);
             canMove = false;
-            availableActios--;
+            AvailableActions--;
         }
 
         /// <summary>
@@ -89,7 +90,7 @@ namespace Game.Gameplay
 
         public virtual void Attack(BaseCharacter p_target)
         {
-            availableActios--;
+            AvailableActions--;
             _mesh.Attack();
             p_target.TakeDamage(attackForce);
         }
@@ -122,6 +123,19 @@ namespace Game.Gameplay
             get
             {
                 return currentLife;
+            }
+        }
+
+        public int AvailableActions
+        {
+            private set
+            {
+                _availableActios = value;
+                EventManager.TriggerEvent(N.Unit.ActionTaken, this);
+            }
+            get
+            {
+                return _availableActios;
             }
         }
     }

@@ -21,7 +21,6 @@ namespace Game.Gameplay
 
 
 
-
         protected override void Start()
         {
             base.Start();
@@ -157,18 +156,9 @@ namespace Game.Gameplay
         void OnWaitAction(object p_data)
         {
             selectedUnit.isWaiting = true;
-            Debug.LogFormat("#Character# Character {0} won't attack ", selectedUnit.name);
+            Debug.LogFormat("#Character# Character {0} is waiting ", selectedUnit.name);
 
-
-            BaseCharacter unit = units.Find(delegate (BaseCharacter p_unit)
-            {
-                return !p_unit.isWaiting;
-            });
-
-            if (unit)
-                SelectUnit(unit);
-
-            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit == null);
+            SelecteNextUnit();
         }
 
         void AttackEnemy(BaseCharacter p_unit)
@@ -179,6 +169,28 @@ namespace Game.Gameplay
                 selectedUnit.Attack(p_unit);
             else
                 Debug.LogFormat("#Character# Character {0} is far to attack {1}", selectedUnit.name, p_unit.name);
+        }
+
+        void SelecteNextUnit()
+        {
+            BaseCharacter unit = units.Find(delegate (BaseCharacter p_unit)
+            {
+                return !p_unit.isWaiting && p_unit.AvailableActions > 0;
+            });
+
+            if (unit)
+                SelectUnit(unit);
+
+            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit == null);
+        }
+
+        protected override void ActionTakenByUnit(BaseCharacter p_unit)
+        {
+            base.ActionTakenByUnit(p_unit);
+            if (p_unit.AvailableActions == 0)
+            {
+                SelecteNextUnit();
+            }
         }
     }
 }

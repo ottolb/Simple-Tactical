@@ -26,6 +26,8 @@ namespace Game.Gameplay
             EventManager.StartListening(N.Game.Setup, OnGameSetup);
             EventManager.StartListening(N.Game.Over, OnGameOver);
             EventManager.StartListening(N.Game.TurnChanged, OnTurnChanged);
+
+            EventManager.StartListening(N.Unit.ActionTaken, OnUnitActionTaken);
         }
 
         protected virtual void Init()
@@ -62,6 +64,20 @@ namespace Game.Gameplay
             {
                 StartTurn();
             }
+        }
+
+        void OnUnitActionTaken(object p_data)
+        {
+            BaseCharacter character = (BaseCharacter)p_data;
+            if (units.Contains(character))
+            {
+                ActionTakenByUnit(character);
+            }
+        }
+
+        protected virtual void ActionTakenByUnit(BaseCharacter p_unit)
+        {
+
         }
 
         protected virtual void SelectUnit(BaseCharacter p_unit)
