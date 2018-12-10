@@ -206,6 +206,8 @@ MonoBehaviour:
   life: 100
   speed: 1
   moveArea: 6
+  attackForce: 40
+  attackRange: 6
   canMove: 0
   canAttack: 0
   isWaiting: 0

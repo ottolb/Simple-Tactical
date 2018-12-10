@@ -11,6 +11,7 @@ namespace Game.Gameplay
         public int availableActios;
 
         public float life;
+        protected float currentLife;
         public float speed;
         public float moveArea;
 
@@ -55,6 +56,7 @@ namespace Game.Gameplay
             availableActios = totalActions;
             isWaiting = false;
             _mesh.StopOutline();
+            currentLife = life;
         }
 
         public virtual void Move(Vector3 p_point)
@@ -80,13 +82,21 @@ namespace Game.Gameplay
         public virtual void Attack(BaseCharacter p_target)
         {
             availableActios--;
-
+            _mesh.Attack();
             p_target.TakeDamage(attackForce);
         }
 
         public virtual void TakeDamage(float p_amount)
         {
-
+            currentLife -= p_amount;
+            if (currentLife <= 0)
+            {
+                _mesh.Die();
+            }
+            else
+            {
+                _mesh.TakeHit();
+            }
         }
 
         protected bool HasMoveEnergy(Vector3 p_target)

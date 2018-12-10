@@ -30,5 +30,20 @@ namespace Game.Gameplay
         {
             outline.enabled = false;
         }
+
+        public void Attack()
+        {
+
+        }
+
+        public void TakeHit()
+        {
+
+        }
+
+        public void Die()
+        {
+
+        }
     }
 }
