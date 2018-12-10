@@ -59,6 +59,7 @@ namespace Game.Gameplay
             Transform point = (UnityEngine.Transform)p_data;
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
             units.Add(go.GetComponent<BaseCharacter>());
+            (units[units.Count - 1] as PlayerCharacter).Setup(Random.Range(0, 1));
         }
 
         protected override void StartTurn()

@@ -58,7 +58,7 @@ namespace Game.Gameplay
 
             EventUIManager.TriggerEvent(NUI.HUD.NPCTurn);
 
-            SelectUnit(selectedUnit);
+            SelectUnit(units[0]);
 
             FindNearestPlayerUnit();
 

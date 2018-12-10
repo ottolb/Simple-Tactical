@@ -47,6 +47,11 @@ namespace Game.Gameplay
 
         }
 
+        public void Setup(int p_charType)
+        {
+            _mesh.SetupCharacter(p_charType);
+        }
+
         void OnUnitSelected(object p_data)
         {
             if (p_data as Transform == transform)
@@ -55,6 +60,7 @@ namespace Game.Gameplay
 
                 selectParticle.SetActive(true);
                 isSelected = true;
+
                 EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
 
                 Dictionary<string, int> dict = new Dictionary<string, int>();
@@ -77,10 +83,11 @@ namespace Game.Gameplay
         {
             if (p_data as Transform == transform)
             {
-                //Debug.Log("Color ");
+                _mesh.Hover();
             }
             else
             {
+                _mesh.StopOutline();
                 //Debug.Log("Color normal");
             }
         }

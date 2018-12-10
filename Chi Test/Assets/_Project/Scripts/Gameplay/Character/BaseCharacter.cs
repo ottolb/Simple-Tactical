@@ -20,10 +20,13 @@ namespace Game.Gameplay
         public bool isWaiting;
 
         protected NavMeshAgent _navMeshAgent;
+        protected CharacterMesh _mesh;
+
 
         protected virtual void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _mesh = GetComponentInChildren<CharacterMesh>();
             name = name.Replace("(Clone)", Random.Range(0, 1000).ToString());
         }
 
@@ -48,6 +51,7 @@ namespace Game.Gameplay
         {
             availableActios = totalActions;
             isWaiting = false;
+            _mesh.StopOutline();
         }
 
         public virtual void Move(Vector3 p_point)
