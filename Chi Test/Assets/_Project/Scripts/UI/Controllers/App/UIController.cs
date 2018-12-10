@@ -19,7 +19,7 @@ namespace Game.UI
 
     public class UIController : BaseUIController
     {
-        \
+
         protected override void Awake()
         {
             base.Awake();
@@ -41,7 +41,7 @@ namespace Game.UI
             EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
             EventUIManager.StartListening(NUI.HUD.NPCTurn, OnNPCTurn);
             EventUIManager.StartListening(NUI.HUD.SetActionButton, OnUpdateActionButtons);
-
+            EventUIManager.StartListening(NUI.HUD.SetAvailableActions, OnSetAvailableActions);
 
         }
 
