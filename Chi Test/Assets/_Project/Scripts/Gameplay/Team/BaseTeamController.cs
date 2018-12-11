@@ -28,6 +28,7 @@ namespace Game.Gameplay
             EventManager.StartListening(N.Game.TurnChanged, OnTurnChanged);
 
             EventManager.StartListening(N.Unit.ActionTaken, OnUnitActionTaken);
+            EventManager.StartListening(N.Unit.Died, OnUnitDied);
         }
 
         protected virtual void Init()
@@ -95,5 +96,17 @@ namespace Game.Gameplay
             units = new List<BaseCharacter>();
         }
 
+        void OnUnitDied(object p_data)
+        {
+            BaseCharacter character = (BaseCharacter)p_data;
+            if (units.Contains(character))
+            {
+                units.Remove(character);
+            }
+            if (units.Count == 0)
+            {
+                EventManager.TriggerEvent(N.Team.Defeat, false);
+            }
+        }
     }
 }

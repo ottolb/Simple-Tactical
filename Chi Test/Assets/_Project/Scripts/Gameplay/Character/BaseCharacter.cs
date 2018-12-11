@@ -24,6 +24,7 @@ namespace Game.Gameplay
         public bool canMove;
         public bool canAttack;
         public bool isWaiting;
+        protected bool dead;
 
         protected NavMeshAgent _navMeshAgent;
         protected CharacterMesh _mesh;
@@ -43,7 +44,6 @@ namespace Game.Gameplay
         // Start is called before the first frame update
         protected virtual void Start()
         {
-            Init();
             EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
         }
 
@@ -56,7 +56,12 @@ namespace Game.Gameplay
 
         public virtual void Die()
         {
+            _mesh.Die();
+            dead = true;
+            transform.Find("Select Collider").gameObject.SetActive(false);
+            _lifeBarWidget.gameObject.SetActive(false);
 
+            EventManager.TriggerEvent(N.Unit.Died, this);
         }
 
         public virtual void Init()
@@ -72,6 +77,8 @@ namespace Game.Gameplay
 
         public virtual void StartTurn()
         {
+            if (dead)
+                return;
             AvailableActions = totalActions;
             isWaiting = false;
             canAttack = canMove = true;
@@ -152,11 +159,12 @@ namespace Game.Gameplay
             CurrentLife -= p_amount;
             if (CurrentLife <= 0)
             {
-                _mesh.Die();
+                this.WaitForSecondsAndDo(0.4f, Die);
             }
             else
             {
-                _mesh.TakeHit();
+                this.WaitForSecondsAndDo(0.4f, _mesh.TakeHit);
+                //_mesh.TakeHit();
             }
         }
 

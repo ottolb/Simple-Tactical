@@ -96,13 +96,6 @@ namespace Game.Event
             public const string Clean = "Level.Clean";
             public const string Passed = "Level.Passed";
             public const string NextLevel = "Level.NextLevel";
-
-            public const string SetFinished = "Level.SetFinished";
-            public const string Progress = "Level.Progress";
-
-            public const string ChangePieceMaterial = "Level.ChangePieceMaterial";
-            public const string ChangeTowerMaterial = "Level.ChangeTowerMaterial";
-            public const string ChangeBackgroundMaterial = "Level.ChangeBackgroundMaterial";
         }
 
         /// <summary>
@@ -124,18 +117,17 @@ namespace Game.Event
             public const string ActionTaken = "Unit.ActionTaken";
         }
 
+        public class Team
+        {
+            public const string Defeat = "Team.Defeat";
+        }
+
         public class Score
         {
             public const string NewHighscore = "Score.New";
             public const string NewScore = "Score.NewScore";
             public const string ScoreAdded = "Score.ScoreAdded";
             public const string CoinPick = "Score.CoinPick";
-        }
-        public class Analytics
-        {
-
-            public const string GD_Taps = "A.GD_Taps";
-
         }
 
 

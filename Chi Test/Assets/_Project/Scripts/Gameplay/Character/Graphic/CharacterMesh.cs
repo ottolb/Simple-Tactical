@@ -25,7 +25,7 @@ namespace Game.Gameplay
         public void SetupCharacter(int p_index)
         {
             characterType = p_index;
-            Debug.LogError("characterType" + characterType);
+            //Destroy other character meshes
             SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
             for (int i = 0; i < skinnedMeshRenderers.Length; i++)
             {
@@ -50,7 +50,7 @@ namespace Game.Gameplay
 
         public void Attack()
         {
-            Debug.LogError("characterType" + characterType);
+            //Set attack type based on character type, starting from 1
             _animator.SetInteger("AttackType", characterType + 1);
         }
 
@@ -61,7 +61,7 @@ namespace Game.Gameplay
 
         public void Die()
         {
-
+            _animator.SetTrigger("Die");
         }
 
         private void OnAnimatorMove()
