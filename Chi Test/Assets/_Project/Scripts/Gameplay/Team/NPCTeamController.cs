@@ -113,7 +113,7 @@ namespace Game.Gameplay
             base.ActionTakenByUnit(p_unit);
             if (p_unit.AvailableActions > 0)
                 return;
-            this.WaitForSecondsAndDo(0.6f, WaitCommands);
+            this.WaitForSecondsAndDo(1.6f, WaitCommands);
         }
 
         void WaitCommands()

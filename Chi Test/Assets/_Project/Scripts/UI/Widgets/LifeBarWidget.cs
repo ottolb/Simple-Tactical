@@ -16,27 +16,31 @@ namespace Game.UI
         private Tween barTween;
         public float speedBarFx;
 
+        Billboard billboard;
+        public AnimationCurve scaleByDistance;
+        Transform ctr;
+        public float maxCameraDistance;
+
 
         void Awake()
         {
-            Transform t = transform;
-            lifeT = t.Find("Life Text").GetComponent<TextMeshProUGUI>();
-            lifeBar = t.Find("Life Bar/Filler").GetComponent<Image>();
-
-            //EventManager.StartListening(N.Game.Start, OnGameStarted);
-            //EventManager.StartListening(N.Level.Load, OnLevelLoaded);
-            //EventManager.StartListening(N.Level.Progress, OnLevelProgress);
+            ctr = transform.Find("Ctr");
+            lifeT = ctr.Find("Life Text").GetComponent<TextMeshProUGUI>();
+            lifeBar = ctr.Find("Life Bar/Filler").GetComponent<Image>();
+            billboard = GetComponent<Billboard>();
         }
 
-        //void OnLevelLoaded(object p_data)
-        //{
-        //    UpdateLevelText();
-        //    UpdateLife(0);
-        //}
+        private void Update()
+        {
+            if (billboard && billboard.cameraToLook)
+            {
+                float distance = Vector3.Distance(transform.position, billboard.cameraToLook.transform.position);
+                ctr.localScale = Vector3.one * scaleByDistance.Evaluate(distance / maxCameraDistance);
+            }
+        }
 
         public void UpdateLife(int p_current, int p_total)
         {
-            //levelBar.fillAmount = (float)p_progress;
             if (barTween != null)
                 barTween.Complete();
 

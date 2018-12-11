@@ -42,7 +42,8 @@ namespace Game.Gameplay
         protected override void Update()
         {
             base.Update();
-            if (canMove || !canAttack)
+
+            if (canMove || !canAttack || dead)
                 return;
 
             if (_navMeshAgent.isStopped)

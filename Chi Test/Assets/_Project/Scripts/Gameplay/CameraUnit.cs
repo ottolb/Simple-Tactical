@@ -61,7 +61,7 @@ namespace Game
             if (!_target)
                 return;
 
-            asdasdsad();
+            HandleMovement();
 
             targetPos = _target.transform.position;
             //Position
@@ -73,7 +73,7 @@ namespace Game
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothLookAt);
         }
 
-        void asdasdsad()
+        void HandleMovement()
         {
             _positionOffset.x += Input.GetAxis("Horizontal") * Time.deltaTime * controlSpeed;
             _positionOffset.z += Input.GetAxis("Vertical") * Time.deltaTime * controlSpeed;
