@@ -204,14 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817456fe842c34b969639f1784c4b261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalActions: 2
-  life: 100
-  speed: 1
-  moveArea: 6
-  attackForce: 40
-  attackRange: 2
-  canMove: 0
-  canAttack: 0
   isWaiting: 0
   moveIndicator: {fileID: 1923280394}
   movementAllowedColor: {r: 0.17933428, g: 0.5849056, b: 0.20745185, a: 1}
