@@ -64,7 +64,7 @@ namespace Game.Gameplay
 
             Debug.LogFormat("#NPC# NPC {0} remainingDistance: {1}", name, _navMeshAgent.remainingDistance);
             //if (_navMeshAgent.remainingDistance < totalDistance - moveArea)
-            if (AgentDone())
+            if (AgentDone() || (_navMeshAgent.remainingDistance < totalDistance - moveArea))
             {
                 Debug.LogFormat("#NPC# NPC {0} stopped: ", name);
                 _navMeshAgent.isStopped = true;
@@ -104,7 +104,10 @@ namespace Game.Gameplay
                 //this.WaitForSecondsAndDo(0.4f, EndAttack);
             }
             else
+            {
                 Debug.LogFormat("#Character# Character {0} is far to attack {1}", name, p_target.name);
+                AvailableActions--;
+            }
         }
 
         void EndAttack()

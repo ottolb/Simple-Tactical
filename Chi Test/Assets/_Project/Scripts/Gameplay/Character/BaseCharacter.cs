@@ -50,6 +50,8 @@ namespace Game.Gameplay
         // Update is called once per frame
         protected virtual void Update()
         {
+            if (dead)
+                return;
             SetupAgentLocomotion();
             //transform.rotation = _mesh.GetRotation();
         }

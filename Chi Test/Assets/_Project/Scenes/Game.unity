@@ -19253,7 +19253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 417952, guid: 33604d1ec5375e3488891483b470a427, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.55
+      value: -6.11
       objectReference: {fileID: 0}
     - target: {fileID: 417952, guid: 33604d1ec5375e3488891483b470a427, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22105,7 +22105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 417952, guid: 33604d1ec5375e3488891483b470a427, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -6.41
       objectReference: {fileID: 0}
     - target: {fileID: 417952, guid: 33604d1ec5375e3488891483b470a427, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27014,7 +27014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnPriority: 200
-  totalUnits: 1
+  totalUnits: 4
   playerPrefab: {fileID: 3185444865318764000, guid: 526016a2ee20f4205bf4a80fd2d9399a,
     type: 3}
   playerUnits: []
@@ -46124,10 +46124,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18fff0312c5814bfbb1a681dc87e5af7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _positionOffset: {x: 7.23, y: 6.87, z: -5.72}
+  _positionOffset: {x: 7.23, y: 6.87, z: 7.12}
+  minPositionOffset: {x: -10, y: 1, z: -10}
+  maxPositionOffset: {x: 10, y: 10, z: 10}
   targetPos: {x: 0, y: 0, z: 0}
   smooth: 4.51
   smoothLookAt: 1.84
+  controlSpeed: 10
 --- !u!1001 &2075831292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47636,6 +47639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595968421902232042, guid: c0a7783aef7db4bd3beb2bcd6ed2fb0b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0a7783aef7db4bd3beb2bcd6ed2fb0b, type: 3}
