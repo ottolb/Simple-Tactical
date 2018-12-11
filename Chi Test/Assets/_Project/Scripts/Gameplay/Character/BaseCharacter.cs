@@ -62,6 +62,12 @@ namespace Game.Gameplay
         public virtual void Init()
         {
             CurrentLife = life;
+            Setup(Random.Range(0, 2));
+        }
+
+        protected void Setup(int p_charType)
+        {
+            _mesh.SetupCharacter(p_charType);
         }
 
         public virtual void StartTurn()
@@ -86,6 +92,12 @@ namespace Game.Gameplay
 
         private void OnAnimatorMove()
         {
+            if (_mesh.locomotion.IsState("Attacks.Sword Attack") ||
+               _mesh.locomotion.IsState("Attacks.Magic Attack"))
+            {
+                return;
+            }
+
             _navMeshAgent.velocity = _mesh.Animator.deltaPosition / Time.deltaTime;
             transform.rotation = _mesh.Animator.rootRotation;
         }
@@ -128,6 +140,7 @@ namespace Game.Gameplay
 
         public virtual void Attack(BaseCharacter p_target)
         {
+            transform.LookAt(p_target.transform);
             canAttack = false;
             AvailableActions--;
             _mesh.Attack();
@@ -167,7 +180,7 @@ namespace Game.Gameplay
 
         public int AvailableActions
         {
-            private set
+            set
             {
                 _availableActios = value;
                 EventManager.TriggerEvent(N.Unit.ActionTaken, this);

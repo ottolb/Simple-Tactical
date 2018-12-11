@@ -43,4 +43,9 @@ public class Locomotion
         m_Animator.SetFloat(m_AgularSpeedId, angularSpeed, angularSpeedDampTime, Time.deltaTime);
         m_Animator.SetFloat(m_DirectionId, direction, directionDampTime, Time.deltaTime);
     }
+
+    public bool IsState(string p_state)
+    {
+        return state.IsName(p_state);
+    }
 }

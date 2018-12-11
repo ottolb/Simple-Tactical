@@ -37,7 +37,6 @@ namespace Game.Gameplay
         public override void Init()
         {
             base.Init();
-            Setup(Random.Range(0, 1));
         }
 
         public override void StartTurn()
@@ -48,11 +47,6 @@ namespace Game.Gameplay
             moveIndicator.SetActive(false);
 
             isSelected = false;
-        }
-
-        public void Setup(int p_charType)
-        {
-            _mesh.SetupCharacter(p_charType);
         }
 
         void OnUnitSelected(object p_data)

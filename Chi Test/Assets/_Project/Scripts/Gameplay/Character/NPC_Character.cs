@@ -15,7 +15,6 @@ namespace Game.Gameplay
         public override void Init()
         {
             base.Init();
-            Setup(Random.Range(0, 1));
             canMove = true;
         }
 
@@ -25,17 +24,13 @@ namespace Game.Gameplay
             totalDistance = -1;
         }
 
-        public void Setup(int p_charType)
-        {
-            _mesh.SetupCharacter(p_charType);
-        }
-
         public override void Move(Vector3 p_point)
         {
             if (CheckAttack(_target))
             {
                 Debug.LogFormat("#NPC# NPC {0} will attack now!", name);
                 Attack(_target);
+                AvailableActions = 0;
             }
             else
             {

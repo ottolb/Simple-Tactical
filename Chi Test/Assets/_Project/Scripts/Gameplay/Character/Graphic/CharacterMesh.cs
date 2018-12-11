@@ -25,13 +25,15 @@ namespace Game.Gameplay
         public void SetupCharacter(int p_index)
         {
             characterType = p_index;
-            SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+            Debug.LogError("characterType" + characterType);
+            SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
             for (int i = 0; i < skinnedMeshRenderers.Length; i++)
             {
                 if (i != p_index)
                     Destroy(skinnedMeshRenderers[i].gameObject);
             }
 
+            skinnedMeshRenderers[p_index].gameObject.SetActive(true);
             outline = skinnedMeshRenderers[p_index].GetComponent<Outline>();
         }
 
@@ -48,6 +50,7 @@ namespace Game.Gameplay
 
         public void Attack()
         {
+            Debug.LogError("characterType" + characterType);
             _animator.SetInteger("AttackType", characterType + 1);
         }
 
