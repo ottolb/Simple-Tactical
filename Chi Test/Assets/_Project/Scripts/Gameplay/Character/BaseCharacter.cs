@@ -60,7 +60,7 @@ namespace Game.Gameplay
             dead = true;
             transform.Find("Select Collider").gameObject.SetActive(false);
             _lifeBarWidget.gameObject.SetActive(false);
-
+            _navMeshAgent.enabled = false;
             EventManager.TriggerEvent(N.Unit.Died, this);
         }
 

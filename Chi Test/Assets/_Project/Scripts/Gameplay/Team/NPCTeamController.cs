@@ -130,5 +130,11 @@ namespace Game.Gameplay
                 CommandUnit();
             }
         }
+
+        protected override void TeamDefeated()
+        {
+            base.TeamDefeated();
+            EventManager.TriggerEvent(N.Team.Defeat, false);
+        }
     }
 }

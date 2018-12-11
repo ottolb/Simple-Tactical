@@ -105,8 +105,13 @@ namespace Game.Gameplay
             }
             if (units.Count == 0)
             {
-                EventManager.TriggerEvent(N.Team.Defeat, false);
+                TeamDefeated();
             }
+        }
+
+        protected virtual void TeamDefeated()
+        {
+
         }
     }
 }

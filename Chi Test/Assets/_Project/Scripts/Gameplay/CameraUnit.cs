@@ -11,13 +11,17 @@ namespace Game
     {
         public Vector3 _positionOffset;
 
+        public Vector3 minPositionOffset;
+
+        public Vector3 maxPositionOffset;
+
         private Transform _tr;
 
         private Transform _target;
 
         public Vector3 targetPos;
 
-        public float smooth, smoothLookAt;
+        public float smooth, smoothLookAt, controlSpeed;
 
 
         void Awake()
@@ -57,6 +61,7 @@ namespace Game
             if (!_target)
                 return;
 
+            asdasdsad();
 
             targetPos = _target.transform.position;
             //Position
@@ -66,6 +71,18 @@ namespace Game
 
             // Smoothly rotate towards the target point.
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothLookAt);
+        }
+
+        void asdasdsad()
+        {
+            _positionOffset.x += Input.GetAxis("Horizontal") * Time.deltaTime * controlSpeed;
+            _positionOffset.z += Input.GetAxis("Vertical") * Time.deltaTime * controlSpeed;
+            _positionOffset.y += Input.GetAxis("Mouse ScrollWheel") * Time.deltaTime * controlSpeed;
+
+
+            _positionOffset.x = Mathf.Clamp(_positionOffset.x, minPositionOffset.x, maxPositionOffset.x);
+            _positionOffset.y = Mathf.Clamp(_positionOffset.y, minPositionOffset.y, maxPositionOffset.y);
+            _positionOffset.z = Mathf.Clamp(_positionOffset.z, minPositionOffset.z, maxPositionOffset.z);
         }
     }
 }
