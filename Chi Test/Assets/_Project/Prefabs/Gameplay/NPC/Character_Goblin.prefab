@@ -803,7 +803,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 474098}
-  - component: {fileID: 9523638}
   - component: {fileID: 4656883263738142437}
   m_Layer: 0
   m_Name: Character_Goblin
@@ -829,25 +828,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &9523638
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124030}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b69174d668ba02d44b14a084b217670a, type: 3}
-  m_Controller: {fileID: 9100000, guid: 84f9d613a6aa6934d8510a542fadac39, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4656883263738142437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,6 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outline: {fileID: 0}
   hoverColor: {r: 0.8235294, g: 0.1882353, b: 0.28648987, a: 1}
+  _animator: {fileID: 0}
 --- !u!1 &126850
 GameObject:
   m_ObjectHideFlags: 0

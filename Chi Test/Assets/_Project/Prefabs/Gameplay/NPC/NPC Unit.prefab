@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 3185444865318764006}
   - component: {fileID: 480817715690861676}
   - component: {fileID: 984738963}
+  - component: {fileID: 9113444836146796027}
   m_Layer: 0
   m_Name: NPC Unit
   m_TagString: Untagged
@@ -203,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalActions: 2
-  availableActios: 0
   life: 100
   speed: 10
   moveArea: 6
@@ -234,6 +234,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &9113444836146796027
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3185444865318764000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b69174d668ba02d44b14a084b217670a, type: 3}
+  m_Controller: {fileID: 9100000, guid: 29ed5a05bb8ad434a993329a6d8879a8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2932035423978819277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,6 +369,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3677601011647594585, guid: 71459218dfb9b45eca961adde1e8d5ac,
+        type: 3}
+      propertyPath: cameraToLook
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71459218dfb9b45eca961adde1e8d5ac, type: 3}
@@ -572,16 +596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3185444865310392863}
     m_Modifications:
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_Name
-      value: Max Move Area
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -635,6 +649,16 @@ PrefabInstance:
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Max Move Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -1,5 +1,7 @@
-﻿using OutlineFX;
+﻿using System;
+using OutlineFX;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Gameplay
 {
@@ -7,6 +9,17 @@ namespace Game.Gameplay
     {
         public Outline outline;
         public Color hoverColor;
+
+        private NavMeshAgent _navMeshAgent;
+        public Animator _animator;
+        public Locomotion locomotion;
+
+
+        private void Awake()
+        {
+            _animator = GetComponentInParent<Animator>();
+            locomotion = new Locomotion(_animator);
+        }
 
         public void SetupCharacter(int p_index)
         {
@@ -44,6 +57,22 @@ namespace Game.Gameplay
         public void Die()
         {
 
+        }
+
+        private void OnAnimatorMove()
+        {
+            _navMeshAgent.velocity = _animator.deltaPosition / Time.deltaTime;
+            //transform.rotation = animator.rootRotation;
+        }
+
+        public void SetNavMeshAgent(NavMeshAgent p_navMeshAgent)
+        {
+            _navMeshAgent = p_navMeshAgent;
+        }
+
+        public Quaternion GetRotation()
+        {
+            return _animator.rootRotation;
         }
     }
 }

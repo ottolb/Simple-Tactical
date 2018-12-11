@@ -35,6 +35,9 @@ namespace Game.Gameplay
             _mesh = GetComponentInChildren<CharacterMesh>();
             _lifeBarWidget = GetComponentInChildren<LifeBarWidget>();
             name = name.Replace("(Clone)", Random.Range(0, 1000).ToString());
+
+            _navMeshAgent.updateRotation = false;
+            _mesh.SetNavMeshAgent(_navMeshAgent);
         }
 
         // Start is called before the first frame update
@@ -46,7 +49,8 @@ namespace Game.Gameplay
         // Update is called once per frame
         protected virtual void Update()
         {
-
+            SetupAgentLocomotion();
+            //transform.rotation = _mesh.GetRotation();
         }
 
         public virtual void Die()
@@ -67,6 +71,29 @@ namespace Game.Gameplay
             _mesh.StopOutline();
         }
 
+        private void OnAnimatorMove()
+        {
+            _navMeshAgent.velocity = _mesh._animator.deltaPosition / Time.deltaTime;
+            transform.rotation = _mesh._animator.rootRotation;
+        }
+
+        protected void SetupAgentLocomotion()
+        {
+            if (AgentDone())
+            {
+                _mesh.locomotion.Do(0, 0);
+            }
+            else
+            {
+                float s = _navMeshAgent.desiredVelocity.magnitude;
+
+                Vector3 velocity = Quaternion.Inverse(transform.rotation) * _navMeshAgent.desiredVelocity;
+
+                float angle = Mathf.Atan2(velocity.x, velocity.z) * 180.0f / 3.14159f;
+
+                _mesh.locomotion.Do(s, angle);
+            }
+        }
 
         public virtual void Move(Vector3 p_point)
         {
@@ -137,6 +164,16 @@ namespace Game.Gameplay
             {
                 return _availableActios;
             }
+        }
+
+        protected bool AgentDone()
+        {
+            return !_navMeshAgent.pathPending && AgentStopping();
+        }
+
+        protected bool AgentStopping()
+        {
+            return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
         }
     }
 }
