@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Game.Data;
 using Game.Event;
 using Game.UI;
 using UnityEngine;
@@ -9,16 +10,9 @@ namespace Game.Gameplay
 {
     public class BaseCharacter : MonoBehaviour, ICharacter
     {
-        public int totalActions;
         private int _availableActios;
 
-        public int life;
         protected int currentLife;
-        public float speed;
-        public float moveArea;
-
-        public int attackForce;
-        public float attackRange;
 
         ///state properties
         public bool isWaiting;
@@ -27,6 +21,8 @@ namespace Game.Gameplay
         protected NavMeshAgent _navMeshAgent;
         protected CharacterMesh _mesh;
         protected LifeBarWidget _lifeBarWidget;
+
+        protected CharacterData _characterData;
 
         protected virtual void Awake()
         {
@@ -43,6 +39,17 @@ namespace Game.Gameplay
         protected virtual void Start()
         {
             EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
+        }
+
+        public virtual void Init(CharacterData p_characterData)
+        {
+            _characterData = p_characterData;
+            CurrentLife = _characterData.life;
+
+            if (_characterData.playerType != PlayerCharacterType.None)
+                _mesh.SetupCharacter((int)_characterData.playerType, _characterData.attackAnimationType);
+            else if (_characterData.enemyType != EnemyCharacterType.None)
+                _mesh.SetupCharacter((int)_characterData.enemyType, _characterData.attackAnimationType);
         }
 
         // Update is called once per frame
@@ -64,22 +71,11 @@ namespace Game.Gameplay
             EventManager.TriggerEvent(N.Unit.Died, this);
         }
 
-        public virtual void Init()
-        {
-            CurrentLife = life;
-            Setup(Random.Range(0, 2));
-        }
-
-        protected void Setup(int p_charType)
-        {
-            _mesh.SetupCharacter(p_charType);
-        }
-
         public virtual void StartTurn()
         {
             if (dead)
                 return;
-            AvailableActions = totalActions;
+            AvailableActions = _characterData.totalActions;
             isWaiting = false;
             _mesh.StopOutline();
         }
@@ -140,7 +136,7 @@ namespace Game.Gameplay
             //Calc distance
             float distance = Vector3.Distance(p_target.transform.position, transform.position);
 
-            return distance < p_target.attackRange;
+            return distance < p_target._characterData.attackRange;
         }
 
         public virtual void Attack(BaseCharacter p_target)
@@ -148,7 +144,7 @@ namespace Game.Gameplay
             transform.LookAt(p_target.transform);
             AvailableActions--;
             _mesh.Attack();
-            p_target.TakeDamage(attackForce);
+            p_target.TakeDamage(_characterData.attackForce);
         }
 
         public virtual void TakeDamage(int p_amount)
@@ -167,7 +163,7 @@ namespace Game.Gameplay
 
         protected bool HasMoveEnergy(Vector3 p_target)
         {
-            return Vector3.Distance(transform.position, p_target) > moveArea;
+            return Vector3.Distance(transform.position, p_target) > _characterData.moveArea;
         }
 
         protected int CurrentLife
@@ -175,7 +171,7 @@ namespace Game.Gameplay
             set
             {
                 currentLife = value;
-                _lifeBarWidget.UpdateLife(currentLife, life);
+                _lifeBarWidget.UpdateLife(currentLife, _characterData.life);
             }
             get
             {

@@ -34,11 +34,6 @@ namespace Game.Gameplay
             EventManager.StartListening(N.Unit.CheckUnitMovement, OnCheckUnitMovement);
         }
 
-        public override void Init()
-        {
-            base.Init();
-        }
-
         public override void StartTurn()
         {
             base.StartTurn();
@@ -121,7 +116,7 @@ namespace Game.Gameplay
         {
             Dictionary<string, int> dict = new Dictionary<string, int>
             {
-                ["total"] = totalActions,
+                ["total"] = _characterData.totalActions,
                 ["current"] = AvailableActions
             };
             EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);

@@ -5,7 +5,7 @@ namespace Game.Gameplay
     public interface ICharacter
     {
 
-        void Init();
+        void Init(CharacterData p_characterData);
 
         void StartTurn();
 

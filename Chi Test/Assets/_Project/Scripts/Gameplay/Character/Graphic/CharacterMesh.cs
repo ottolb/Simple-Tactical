@@ -14,7 +14,7 @@ namespace Game.Gameplay
         private Animator _animator;
         public Locomotion locomotion;
 
-        private int characterType;
+        private int attackType;
 
         private void Awake()
         {
@@ -22,9 +22,12 @@ namespace Game.Gameplay
             locomotion = new Locomotion(_animator);
         }
 
-        public void SetupCharacter(int p_index)
+        public void SetupCharacter(int p_index, int p_attackAnimationType)
         {
-            characterType = p_index;
+            attackType = p_attackAnimationType;
+            //Character types start from 1, then decrease it
+            p_index--;
+
             //Destroy other character meshes
             SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>(true);
             for (int i = 0; i < skinnedMeshRenderers.Length; i++)
@@ -51,7 +54,7 @@ namespace Game.Gameplay
         public void Attack()
         {
             //Set attack type based on character type, starting from 1
-            _animator.SetInteger("AttackType", characterType + 1);
+            _animator.SetInteger("AttackType", attackType);
         }
 
         public void TakeHit()

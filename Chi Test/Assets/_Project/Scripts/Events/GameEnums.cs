@@ -10,37 +10,36 @@
 using UnityEngine;
 using System.Collections;
 
-namespace Game.Event
+namespace Game.Data
 {
     public class GameEnums
     {
 
     }
 
-    public enum PlayerType
+    public enum PlayerCharacterType
     {
-        Competitor = 1,
-        Audience = 2,
-        None = 1000,
+        None = 0,
+        SwordMale = 1,
+        SwordFemale = 2,
     }
 
-    public enum StartAppType
+    public enum EnemyCharacterType
     {
-        Default = 1,
-        Contestant = 2,
-        Audience = 3,
-        Login = 4,
-        None = 1000,
+        None = 0,
+        Ghost1 = 1,
+        Ghost2 = 2,
+        GoblinFemale = 3,
+        GoblinMale = 4,
+        GoblinShaman = 5,
+        GoblinWarChief = 6,
+        GoblinWarriorFemale = 7,
+        GoblinWarriorMale = 8,
+        GoblinRockGolem = 9,
+        GoblinSkeletonKnight = 10,
+        GoblinSkeletonSlave = 11,
+        GoblinSkeletonSoldier = 12,
+        GoblinSkeletonSoldier2 = 13,
+        GoblinTourmentedSoul = 14,
     }
-
-    public enum SideMenuState
-    {
-        NotInCompetition = 1,
-        Competition = 2,
-        CompetitionRunning = 3
-        /*Audience = 3,
-		Login = 4,
-		None = 1000,*/
-    }
-
 }

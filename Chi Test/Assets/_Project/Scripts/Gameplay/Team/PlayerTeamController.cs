@@ -20,7 +20,6 @@ namespace Game.Gameplay
 
 
 
-
         protected override void Start()
         {
             base.Start();
@@ -58,7 +57,7 @@ namespace Game.Gameplay
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
             units.Add(go.GetComponent<BaseCharacter>());
             //(units[units.Count - 1] as PlayerCharacter).Setup(Random.Range(0, 1));
-            units[units.Count - 1].Init();
+            units[units.Count - 1].Init(characterPresets[Random.Range(0, characterPresets.Length)]);
         }
 
         protected override void StartTurn()

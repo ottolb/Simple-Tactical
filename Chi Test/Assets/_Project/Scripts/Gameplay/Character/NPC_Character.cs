@@ -15,9 +15,9 @@ namespace Game.Gameplay
 
 
 
-        public override void Init()
+        public override void Init(CharacterData p_characterData)
         {
-            base.Init();
+            base.Init(p_characterData);
             isMoving = false;
         }
 
@@ -76,7 +76,7 @@ namespace Game.Gameplay
 
             Debug.LogFormat("#NPC# NPC {0} remainingDistance: {1}", name, _navMeshAgent.remainingDistance);
             //if (_navMeshAgent.remainingDistance < totalDistance - moveArea)
-            if (AgentDone() || (_navMeshAgent.remainingDistance < totalDistance - moveArea))
+            if (AgentDone() || (_navMeshAgent.remainingDistance < totalDistance - _characterData.moveArea))
             {
                 Debug.LogFormat("#NPC# NPC {0} stopped: ", name);
                 _navMeshAgent.isStopped = true;

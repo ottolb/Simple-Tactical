@@ -14,6 +14,8 @@ namespace Game.Gameplay
 
         public int totalUnits;
 
+        public CharacterData[] characterPresets;
+
         protected bool isPlaying, isMyTurn, isUnitSelected;
 
         protected List<BaseCharacter> units;
