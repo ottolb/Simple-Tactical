@@ -160,6 +160,9 @@ namespace Game.Gameplay
 
         void AttackEnemy(BaseCharacter p_unit)
         {
+            if (selectedUnit.AvailableActions <= 0)
+                return;
+
             //selectedUnit.Attack()
             Debug.LogFormat("#Character# Character {0} will attack {1}", selectedUnit.name, p_unit.name);
             if (selectedUnit.CheckAttack(p_unit))

@@ -11,17 +11,21 @@ namespace Game.Gameplay
     {
         private float totalDistance;
         private BaseCharacter _target;
+        private bool isMoving;
+
+
 
         public override void Init()
         {
             base.Init();
-            canMove = true;
+            isMoving = false;
         }
 
         public override void StartTurn()
         {
             base.StartTurn();
             totalDistance = -1;
+            isMoving = false;
         }
 
         public override void Move(Vector3 p_point)
@@ -35,6 +39,7 @@ namespace Game.Gameplay
             else
             {
                 _navMeshAgent.isStopped = false;
+                isMoving = true;
                 base.Move(p_point);
             }
         }
@@ -43,9 +48,15 @@ namespace Game.Gameplay
         {
             base.Update();
 
-            if (canMove || !canAttack || dead)
+            if (dead)
                 return;
 
+            if (isMoving)
+                HandleMovement();
+        }
+
+        void HandleMovement()
+        {
             if (_navMeshAgent.isStopped)
             {
                 Debug.LogFormat("#NPC# NPC {0} is Stopped", name);
@@ -70,6 +81,7 @@ namespace Game.Gameplay
                 Debug.LogFormat("#NPC# NPC {0} stopped: ", name);
                 _navMeshAgent.isStopped = true;
                 Attack(_target);
+                isMoving = false;
             }
         }
 
@@ -102,18 +114,12 @@ namespace Game.Gameplay
             if (CheckAttack(p_target))
             {
                 base.Attack(p_target);
-                //this.WaitForSecondsAndDo(0.4f, EndAttack);
             }
             else
             {
                 Debug.LogFormat("#Character# Character {0} is far to attack {1}", name, p_target.name);
                 AvailableActions--;
             }
-        }
-
-        void EndAttack()
-        {
-            //EventManager.TriggerEvent(N.Unit.Attacked, this);
         }
     }
 }

@@ -21,8 +21,6 @@ namespace Game.Gameplay
         public float attackRange;
 
         ///state properties
-        public bool canMove;
-        public bool canAttack;
         public bool isWaiting;
         protected bool dead;
 
@@ -83,7 +81,6 @@ namespace Game.Gameplay
                 return;
             AvailableActions = totalActions;
             isWaiting = false;
-            canAttack = canMove = true;
             _mesh.StopOutline();
         }
 
@@ -130,7 +127,6 @@ namespace Game.Gameplay
         public virtual void Move(Vector3 p_point)
         {
             _navMeshAgent.SetDestination(p_point);
-            canMove = false;
             AvailableActions--;
         }
 
@@ -150,7 +146,6 @@ namespace Game.Gameplay
         public virtual void Attack(BaseCharacter p_target)
         {
             transform.LookAt(p_target.transform);
-            canAttack = false;
             AvailableActions--;
             _mesh.Attack();
             p_target.TakeDamage(attackForce);

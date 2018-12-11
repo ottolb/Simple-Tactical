@@ -18,7 +18,7 @@ namespace Game
         [MenuItem("Editor/Create Level Setup")]
         public static void CreateAsset()
         {
-            CreateAsset<CharacterData>();
+            CreateAsset<Gameplay.CharacterData>();
         }
 
         /// <summary>

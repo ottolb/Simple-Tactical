@@ -59,7 +59,7 @@ namespace Game.Gameplay
                 isSelected = true;
 
                 UpdateActions();
-                EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, canMove || canAttack);
+                EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, AvailableActions > 0);
             }
             else
             {
@@ -67,14 +67,15 @@ namespace Game.Gameplay
                 selectParticle.SetActive(false);
             }
 
-            moveAreaParticle.SetActive(canMove && isSelected);
-            moveIndicator.SetActive(canMove && isSelected);
+            bool _canMove = AvailableActions > 0;
+            moveAreaParticle.SetActive(_canMove && isSelected);
+            moveIndicator.SetActive(_canMove && isSelected);
 
         }
 
         void OnMoveUnit(object p_data)
         {
-            if (isSelected && canMove)
+            if (isSelected && AvailableActions > 0)
             {
                 if (hasMoveEnergy)
                 {
@@ -91,8 +92,7 @@ namespace Game.Gameplay
         public override void Move(Vector3 p_point)
         {
             base.Move(p_point);
-            moveAreaParticle.SetActive(false);
-            moveIndicator.SetActive(false);
+
 
             UpdateActions();
             Debug.LogFormat("#Character# Character {0} moved ", name);
@@ -100,7 +100,7 @@ namespace Game.Gameplay
 
         void OnCheckUnitMovement(object p_data)
         {
-            if (!isSelected || !canMove)
+            if (!isSelected || AvailableActions <= 0)
                 return;
 
             Vector3 position = (Vector3)p_data;
@@ -125,6 +125,11 @@ namespace Game.Gameplay
                 ["current"] = AvailableActions
             };
             EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
+
+
+            bool _canMove = AvailableActions > 0;
+            moveAreaParticle.SetActive(_canMove);
+            moveIndicator.SetActive(_canMove);
         }
     }
 }
