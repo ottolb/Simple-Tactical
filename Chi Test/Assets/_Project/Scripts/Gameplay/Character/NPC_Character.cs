@@ -10,12 +10,13 @@ namespace Game.Gameplay
     public class NPC_Character : BaseCharacter
     {
         private float totalDistance;
-
+        private BaseCharacter _target;
 
         public override void Init()
         {
             base.Init();
             Setup(Random.Range(0, 1));
+            canMove = true;
         }
 
         public override void StartTurn()
@@ -57,11 +58,13 @@ namespace Game.Gameplay
                 Debug.LogFormat("#NPC# NPC {0} total distance set: {1}", name, totalDistance);
             }
 
-
-            if (_navMeshAgent.remainingDistance < totalDistance - moveArea)
+            Debug.LogFormat("#NPC# NPC {0} remainingDistance: {1}", name, _navMeshAgent.remainingDistance);
+            //if (_navMeshAgent.remainingDistance < totalDistance - moveArea)
+            if (AgentDone())
             {
                 Debug.LogFormat("#NPC# NPC {0} stopped: ", name);
                 _navMeshAgent.isStopped = true;
+                Attack(_target);
             }
         }
 
@@ -82,6 +85,22 @@ namespace Game.Gameplay
         {
             Vector3 position = (Vector3)p_data;
             bool aux = HasMoveEnergy(position);
+        }
+
+        public void SetTarget(BaseCharacter p_character)
+        {
+            _target = p_character;
+        }
+
+        public override void Attack(BaseCharacter p_target)
+        {
+            if (CheckAttack(p_target))
+            {
+                base.Attack(p_target);
+                EventManager.TriggerEvent(N.Unit.ActionTaken, this);
+            }
+            else
+                Debug.LogFormat("#Character# Character {0} is far to attack {1}", name, p_target.name);
         }
     }
 }

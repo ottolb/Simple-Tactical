@@ -64,6 +64,9 @@ namespace Game.Gameplay
             {
                 StartTurn();
             }
+            else
+                isMyTurn = false;
+
         }
 
         void OnUnitActionTaken(object p_data)

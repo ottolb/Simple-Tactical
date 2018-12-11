@@ -226,7 +226,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -596,6 +596,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3185444865310392863}
     m_Modifications:
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Max Move Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -649,16 +659,6 @@ PrefabInstance:
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_Name
-      value: Max Move Area
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

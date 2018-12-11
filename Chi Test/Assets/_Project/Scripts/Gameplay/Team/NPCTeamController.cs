@@ -15,6 +15,7 @@ namespace Game.Gameplay
 
         public List<BaseCharacter> playerUnits;
 
+        private int currentUnitID;
 
         protected override void Start()
         {
@@ -59,15 +60,19 @@ namespace Game.Gameplay
 
             foreach (var unit in units)
             {
-                unit.Init();
+                unit.StartTurn();
             }
 
             EventUIManager.TriggerEvent(NUI.HUD.NPCTurn);
 
-            SelectUnit(units[0]);
+            currentUnitID = 0;
+        }
 
+        void CommandUnit()
+        {
+            Debug.Log("#NPC TEAM# Command next unit");
+            SelectUnit(units[currentUnitID]);
             FindNearestPlayerUnit();
-
         }
 
         void FindNearestPlayerUnit()
@@ -86,7 +91,10 @@ namespace Game.Gameplay
             }
 
             if (nearestPlayerUnit)
+            {
+                (selectedUnit as NPC_Character).SetTarget(nearestPlayerUnit);
                 MoveUnit(nearestPlayerUnit.transform.position);
+            }
         }
 
         void MoveUnit(Vector3 p_pos)
@@ -97,6 +105,21 @@ namespace Game.Gameplay
         void OnPlayerUnitsSet(object p_data)
         {
             playerUnits = (List<BaseCharacter>)p_data;
+        }
+
+        protected override void ActionTakenByUnit(BaseCharacter p_unit)
+        {
+            base.ActionTakenByUnit(p_unit);
+            currentUnitID++;
+            if (currentUnitID >= units.Count)
+            {
+                Debug.Log("#NPC TEAM# NPC Team finished turn");
+                EventManager.TriggerEvent(N.Game.TurnFinished);
+            }
+            else
+            {
+                CommandUnit();
+            }
         }
     }
 }
