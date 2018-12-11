@@ -14,6 +14,7 @@ namespace Game.Gameplay
         public Animator _animator;
         public Locomotion locomotion;
 
+        private int characterType;
 
         private void Awake()
         {
@@ -23,6 +24,7 @@ namespace Game.Gameplay
 
         public void SetupCharacter(int p_index)
         {
+            characterType = p_index;
             SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
             for (int i = 0; i < skinnedMeshRenderers.Length; i++)
             {
@@ -46,12 +48,12 @@ namespace Game.Gameplay
 
         public void Attack()
         {
-
+            _animator.SetInteger("AttackType", characterType + 1);
         }
 
         public void TakeHit()
         {
-
+            _animator.SetTrigger("GetHit");
         }
 
         public void Die()
