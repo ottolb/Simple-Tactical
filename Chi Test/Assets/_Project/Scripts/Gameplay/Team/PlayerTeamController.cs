@@ -26,7 +26,6 @@ namespace Game.Gameplay
             base.Start();
             _input = BaseInput.SelectInput(gameObject);
             cam = Camera.main;
-            EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
 
             //UI events
             EventUIManager.StartListening(NUI.HUD.EndTurn, OnPlayerTurnEndAction);
@@ -140,12 +139,10 @@ namespace Game.Gameplay
                 else
                     EventManager.TriggerEvent(N.Unit.HoverUnit, hit.collider.transform.parent);
             }
+            else
+                EventManager.TriggerEvent(N.Unit.HoverUnit, null);
+
             return false;
-        }
-
-        void OnBalanceUpdated(object p_data)
-        {
-
         }
 
         void OnPlayerTurnEndAction(object p_data)

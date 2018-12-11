@@ -28,7 +28,6 @@ namespace Game.Gameplay
 
             moveIndicatorMtl = moveIndicator.GetComponent<Renderer>().material;
 
-            EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
             EventManager.StartListening(N.Unit.SelectUnit, OnUnitSelected);
 
             EventManager.StartListening(N.Unit.MoveUnit, OnMoveUnit);
@@ -77,19 +76,6 @@ namespace Game.Gameplay
             moveAreaParticle.SetActive(canMove && isSelected);
             moveIndicator.SetActive(canMove && isSelected);
 
-        }
-
-        void OnHoverUnit(object p_data)
-        {
-            if (p_data as Transform == transform)
-            {
-                _mesh.Hover();
-            }
-            else
-            {
-                _mesh.StopOutline();
-                //Debug.Log("Color normal");
-            }
         }
 
         void OnMoveUnit(object p_data)
@@ -146,6 +132,5 @@ namespace Game.Gameplay
             };
             EventUIManager.TriggerEvent(NUI.HUD.SetAvailableActions, dict);
         }
-
     }
 }

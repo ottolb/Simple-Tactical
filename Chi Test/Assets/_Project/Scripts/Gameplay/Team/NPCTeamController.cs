@@ -89,12 +89,10 @@ namespace Game.Gameplay
                 MoveUnit(nearestPlayerUnit.transform.position);
         }
 
-
         void MoveUnit(Vector3 p_pos)
         {
             selectedUnit.Move(p_pos);
         }
-
 
         void OnPlayerUnitsSet(object p_data)
         {

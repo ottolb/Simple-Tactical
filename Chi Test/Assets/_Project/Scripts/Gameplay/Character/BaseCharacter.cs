@@ -44,6 +44,7 @@ namespace Game.Gameplay
         protected virtual void Start()
         {
             Init();
+            EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
         }
 
         // Update is called once per frame
@@ -69,6 +70,18 @@ namespace Game.Gameplay
             isWaiting = false;
             canMove = true;
             _mesh.StopOutline();
+        }
+
+        protected virtual void OnHoverUnit(object p_data)
+        {
+            if (p_data as Transform == transform)
+            {
+                _mesh.Hover();
+            }
+            else
+            {
+                _mesh.StopOutline();
+            }
         }
 
         private void OnAnimatorMove()
