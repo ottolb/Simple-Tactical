@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de1cce7e186664cc88a4cb6a6f0dc1fb, type: 3}
-  m_Name: Globin Shaman Hero
+  m_Name: Globin Shaman Hero 2
   m_EditorClassIdentifier: 
   playerType: 0
   enemyType: 5

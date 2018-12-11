@@ -31,7 +31,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: enemyType
-    value: 1
+    value: 4
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: totalActions
@@ -39,21 +39,21 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: life
-    value: 70
+    value: 90
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: moveArea
-    value: 4.53
+    value: 3.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: attackForce
-    value: 20
+    value: 35
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: attackRange
-    value: 2
+    value: 2.36
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: attackAnimationType
-    value: 1
+    value: 2
     objectReference: {fileID: 0}

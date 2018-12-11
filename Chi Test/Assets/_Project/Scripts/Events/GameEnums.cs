@@ -35,11 +35,11 @@ namespace Game.Data
         GoblinWarChief = 6,
         GoblinWarriorFemale = 7,
         GoblinWarriorMale = 8,
-        GoblinRockGolem = 9,
-        GoblinSkeletonKnight = 10,
-        GoblinSkeletonSlave = 11,
-        GoblinSkeletonSoldier = 12,
-        GoblinSkeletonSoldier2 = 13,
-        GoblinTourmentedSoul = 14,
+        RockGolem = 9,
+        SkeletonKnight = 10,
+        SkeletonSlave = 11,
+        SkeletonSoldier = 12,
+        SkeletonSoldier2 = 13,
+        TourmentedSoul = 14,
     }
 }

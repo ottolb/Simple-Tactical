@@ -14,6 +14,7 @@ namespace Game.Gameplay
 
         public GameObject moveIndicator;
         private Material moveIndicatorMtl;
+        LineRenderer lineRenderer;
 
         public Color movementAllowedColor, movementBlockedColor;
 
@@ -25,6 +26,8 @@ namespace Game.Gameplay
             base.Awake();
             selectParticle = transform.Find("Mesh/Selection").gameObject;
             moveAreaParticle = transform.Find("Mesh/Max Move Area").gameObject;
+            lineRenderer = transform.Find("Mesh/Path Line Rendeder").GetComponent<LineRenderer>();
+            lineRenderer.useWorldSpace = true;
 
             moveIndicatorMtl = moveIndicator.GetComponent<Renderer>().material;
 
@@ -38,6 +41,7 @@ namespace Game.Gameplay
         {
             base.StartTurn();
             selectParticle.SetActive(false);
+            lineRenderer.enabled = false;
             moveAreaParticle.SetActive(false);
             moveIndicator.SetActive(false);
 
@@ -65,6 +69,7 @@ namespace Game.Gameplay
             bool _canMove = AvailableActions > 0;
             moveAreaParticle.SetActive(_canMove && isSelected);
             moveIndicator.SetActive(_canMove && isSelected);
+            lineRenderer.enabled = _canMove && isSelected;
 
         }
 
@@ -100,6 +105,8 @@ namespace Game.Gameplay
 
             Vector3 position = (Vector3)p_data;
             moveIndicator.transform.position = position;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, position);
             bool aux = HasMoveEnergy(position);
             if (aux != hasMoveEnergy)
                 moveIndicatorMtl.DOColor(hasMoveEnergy ? movementAllowedColor : movementBlockedColor, 0.2f);
@@ -125,6 +132,7 @@ namespace Game.Gameplay
             bool _canMove = AvailableActions > 0;
             moveAreaParticle.SetActive(_canMove);
             moveIndicator.SetActive(_canMove);
+            lineRenderer.enabled = _canMove;
         }
     }
 }
