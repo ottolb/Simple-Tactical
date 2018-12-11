@@ -178,7 +178,7 @@ namespace Game.Gameplay
             if (unit)
                 SelectUnit(unit);
 
-            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit == null);
+            EventUIManager.TriggerEvent(NUI.HUD.SetActionButton, unit != null);
         }
 
         protected override void ActionTakenByUnit(BaseCharacter p_unit)

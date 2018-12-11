@@ -68,7 +68,7 @@ namespace Game.Gameplay
         {
             AvailableActions = totalActions;
             isWaiting = false;
-            canMove = true;
+            canAttack = canMove = true;
             _mesh.StopOutline();
         }
 
@@ -86,8 +86,8 @@ namespace Game.Gameplay
 
         private void OnAnimatorMove()
         {
-            _navMeshAgent.velocity = _mesh._animator.deltaPosition / Time.deltaTime;
-            transform.rotation = _mesh._animator.rootRotation;
+            _navMeshAgent.velocity = _mesh.Animator.deltaPosition / Time.deltaTime;
+            transform.rotation = _mesh.Animator.rootRotation;
         }
 
         protected void SetupAgentLocomotion()
@@ -101,9 +101,7 @@ namespace Game.Gameplay
                 float s = _navMeshAgent.desiredVelocity.magnitude;
 
                 Vector3 velocity = Quaternion.Inverse(transform.rotation) * _navMeshAgent.desiredVelocity;
-
                 float angle = Mathf.Atan2(velocity.x, velocity.z) * 180.0f / 3.14159f;
-
                 _mesh.locomotion.Do(s, angle);
             }
         }
@@ -130,6 +128,7 @@ namespace Game.Gameplay
 
         public virtual void Attack(BaseCharacter p_target)
         {
+            canAttack = false;
             AvailableActions--;
             _mesh.Attack();
             p_target.TakeDamage(attackForce);

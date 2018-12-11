@@ -11,7 +11,7 @@ namespace Game.Gameplay
         public Color hoverColor;
 
         private NavMeshAgent _navMeshAgent;
-        public Animator _animator;
+        private Animator _animator;
         public Locomotion locomotion;
 
         private int characterType;
@@ -75,6 +75,11 @@ namespace Game.Gameplay
         public Quaternion GetRotation()
         {
             return _animator.rootRotation;
+        }
+
+        public Animator Animator
+        {
+            get { return _animator; }
         }
     }
 }

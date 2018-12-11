@@ -32,13 +32,22 @@ namespace Game.Gameplay
 
         public override void Move(Vector3 p_point)
         {
-            base.Move(p_point);
+            if (CheckAttack(_target))
+            {
+                Debug.LogFormat("#NPC# NPC {0} will attack now!", name);
+                Attack(_target);
+            }
+            else
+            {
+                _navMeshAgent.isStopped = false;
+                base.Move(p_point);
+            }
         }
 
         protected override void Update()
         {
             base.Update();
-            if (canMove)
+            if (canMove || !canAttack)
                 return;
 
             if (_navMeshAgent.isStopped)
@@ -97,10 +106,15 @@ namespace Game.Gameplay
             if (CheckAttack(p_target))
             {
                 base.Attack(p_target);
-                EventManager.TriggerEvent(N.Unit.ActionTaken, this);
+                //this.WaitForSecondsAndDo(0.4f, EndAttack);
             }
             else
                 Debug.LogFormat("#Character# Character {0} is far to attack {1}", name, p_target.name);
+        }
+
+        void EndAttack()
+        {
+            //EventManager.TriggerEvent(N.Unit.Attacked, this);
         }
     }
 }

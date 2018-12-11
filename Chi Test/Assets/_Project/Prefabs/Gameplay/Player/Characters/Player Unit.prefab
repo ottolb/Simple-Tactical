@@ -208,7 +208,7 @@ MonoBehaviour:
   speed: 1
   moveArea: 6
   attackForce: 40
-  attackRange: 6
+  attackRange: 2
   canMove: 0
   canAttack: 0
   isWaiting: 0
@@ -224,7 +224,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3185444865318764000}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -527,6 +527,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3677601011647594585, guid: 71459218dfb9b45eca961adde1e8d5ac,
+        type: 3}
+      propertyPath: cameraToLook
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3677601011773298016, guid: 71459218dfb9b45eca961adde1e8d5ac,
         type: 3}
       propertyPath: m_Color.r
@@ -557,6 +562,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3185444865310392863}
     m_Modifications:
+    - target: {fileID: 162860, guid: 1276ff2775bc74402a086d982fecfc5e, type: 3}
+      propertyPath: m_Name
+      value: Character_Hero_Knight
+      objectReference: {fileID: 0}
     - target: {fileID: 487758, guid: 1276ff2775bc74402a086d982fecfc5e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -600,10 +609,6 @@ PrefabInstance:
     - target: {fileID: 487758, guid: 1276ff2775bc74402a086d982fecfc5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 162860, guid: 1276ff2775bc74402a086d982fecfc5e, type: 3}
-      propertyPath: m_Name
-      value: Character_Hero_Knight
       objectReference: {fileID: 0}
     - target: {fileID: 406736, guid: 1276ff2775bc74402a086d982fecfc5e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -658,6 +663,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3185444865310392863}
     m_Modifications:
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_Name
+      value: Max Move Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -711,16 +726,6 @@ PrefabInstance:
     - target: {fileID: 8538613184289430181, guid: 0e6ef6813fc474acaa08065b677ac4e5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_Name
-      value: Max Move Area
-      objectReference: {fileID: 0}
-    - target: {fileID: 8538613184289719941, guid: 0e6ef6813fc474acaa08065b677ac4e5,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

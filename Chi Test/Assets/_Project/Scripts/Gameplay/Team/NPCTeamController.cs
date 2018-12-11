@@ -66,6 +66,7 @@ namespace Game.Gameplay
             EventUIManager.TriggerEvent(NUI.HUD.NPCTurn);
 
             currentUnitID = 0;
+            CommandUnit();
         }
 
         void CommandUnit()
@@ -110,7 +111,15 @@ namespace Game.Gameplay
         protected override void ActionTakenByUnit(BaseCharacter p_unit)
         {
             base.ActionTakenByUnit(p_unit);
+            if (p_unit.AvailableActions > 0)
+                return;
+            this.WaitForSecondsAndDo(0.6f, WaitCommands);
+        }
+
+        void WaitCommands()
+        {
             currentUnitID++;
+            Debug.Log("#NPC TEAM# currentUnitID " + currentUnitID);
             if (currentUnitID >= units.Count)
             {
                 Debug.Log("#NPC TEAM# NPC Team finished turn");
