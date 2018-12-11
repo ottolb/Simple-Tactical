@@ -21,7 +21,7 @@ namespace Game.Gameplay
             EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
 
             EventManager.StartListening(N.Game.Start, OnGameStarted);
-            EventManager.StartListening(N.Game.Over, OnGameStarted);
+            EventManager.StartListening(N.Game.Over, OnGameOver);
 
             EventManager.StartListening(N.Game.RegisterUnitController, OnRegisterUnitController);
             EventManager.StartListening(N.Game.TurnFinished, OnTurnFinished);

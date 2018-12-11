@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Event;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -20,7 +21,9 @@ namespace Game
         {
             base.ListenEvents();
             EventManager.StartListening(N.App.Loaded, OnAppLoaded);
-            EventManager.StartListening(N.Level.NextLevel, OnLevelChanged);
+            //EventManager.StartListening(N.Level.NextLevel, OnLevelChanged);
+
+            EventManager.StartListening(N.Team.Defeat, OnTeamDefeated);
 
 
             EventUIManager.StartListening(NUI.Home.Play, OnPlayClicked);
@@ -35,6 +38,10 @@ namespace Game
         void OnRestartClicked(object p_data)
         {
             EventManager.TriggerEvent(N.Level.Clean);
+            this.WaitForSecondsAndDo(0.5f, delegate
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
         }
 
         void LoadGame()
@@ -53,21 +60,27 @@ namespace Game
             EventManager.TriggerEvent(N.Game.Start);
         }
 
-        void OnAppLoaded(object p_desc)
+        void OnTeamDefeated(object p_isPlayer)
         {
-            /*this.WaitForSecondsAndDo(0.5f, delegate
-            {
-                EventManager.TriggerEvent(N.Level.Load);
-            });*/
+            bool isPlayer = (bool)p_isPlayer;
+            EventManager.TriggerEvent(N.Team.StopAll);
+            EventManager.TriggerEvent(N.Game.Over, isPlayer);
+
+            //EventUIManager.TriggerEvent(NUI.EndGame.Show, isPlayer);
+
         }
 
-        void OnLevelChanged(object p_data)
+        void OnAppLoaded(object p_desc)
         {
-            this.WaitForSecondsAndDo(1.4f, delegate
-            {
-                EventManager.TriggerEvent(N.Game.Start);
-            });
         }
+
+        //void OnLevelChanged(object p_data)
+        //{
+        //    this.WaitForSecondsAndDo(1.4f, delegate
+        //    {
+        //        EventManager.TriggerEvent(N.Game.Start);
+        //    });
+        //}
 
     }
 }

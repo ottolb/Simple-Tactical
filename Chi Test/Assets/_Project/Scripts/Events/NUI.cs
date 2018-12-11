@@ -19,16 +19,13 @@ namespace Game.Event
         {
             public const string Close = "Home.Back";
             public const string Play = "Home.Play";
-            public const string Continue = "Home.Continue";
-            public const string ShowTutorial = "Home.ShowTutorial";
-            public const string ShowLeaderboards = "Home.ShowLeaderboards";
 
         }
 
         public class EndGame
         {
+            public const string Show = "EndGame.Show";
             public const string Restart = "EndGame.Restart";
-            public const string LevelSlider = "EndGame.LevelSlider";
         }
 
         public class HUD

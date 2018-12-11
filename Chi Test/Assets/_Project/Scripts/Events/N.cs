@@ -120,6 +120,7 @@ namespace Game.Event
         public class Team
         {
             public const string Defeat = "Team.Defeat";
+            public const string StopAll = "Team.StopAll";
         }
 
         public class Score

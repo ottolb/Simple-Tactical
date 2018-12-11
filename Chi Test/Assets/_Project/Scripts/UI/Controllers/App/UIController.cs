@@ -30,25 +30,16 @@ namespace Game.UI
 
             EventManager.StartListening(N.App.Loaded, OnAppLoaded);
             EventManager.StartListening(N.Game.Over, OnGameOver);
-            EventManager.StartListening(N.Level.NextLevel, OnLevelChanged);
 
-            EventUIManager.StartListening(NUI.Home.Continue, OnContinueClicked);
             EventUIManager.StartListening(NUI.Home.Play, OnPlayClicked);
             EventUIManager.StartListening(NUI.EndGame.Restart, OnRestartClicked);
 
-            EventUIManager.StartListening(NUI.Home.ShowTutorial, OnShowTutorial);
 
             EventUIManager.StartListening(NUI.HUD.PlayerTurn, OnPlayerTurn);
             EventUIManager.StartListening(NUI.HUD.NPCTurn, OnNPCTurn);
             EventUIManager.StartListening(NUI.HUD.SetActionButton, OnUpdateActionButtons);
             EventUIManager.StartListening(NUI.HUD.SetAvailableActions, OnSetAvailableActions);
 
-        }
-
-        void OnContinueClicked(object p_desc)
-        {
-            endGameUI.Hide(true);
-            hudUI.Show(true);
         }
 
         void OnAppLoaded(object p_desc)
@@ -61,23 +52,14 @@ namespace Game.UI
 
         void OnGameOver(object p_desc)
         {
-            int p = 0;//(int)(levelProgress * 100);
+            bool isPlayerDefeat = (bool)p_desc;
             this.WaitForSecondsAndDo(0.5f, () =>
             {
                 hudUI.Hide(false);
                 endGameUI.Show(true);
-                endGameUI.Setup(ScoreController.Instance.Score,
-                                ScoreController.Instance.HasNewHighScore,
-                                p);
+                endGameUI.Setup(isPlayerDefeat);
             });
 
-        }
-
-        void OnLevelChanged(object p_data)
-        {
-            //LevelConfiguration level = (LevelConfiguration)p_data;
-            //endGameUI.SetMessage(level.textMessage);
-            hudUI.FadeOut();
         }
 
         void OnPlayClicked(object p_desc)
@@ -90,22 +72,6 @@ namespace Game.UI
         void OnRestartClicked(object p_desc)
         {
             UICommonController.Instance.fadeUI.FadeIn();
-            this.WaitForSecondsAndDo(0.2f, delegate
-            {
-                homeUI.Show(true);
-                hudUI.Hide(true);
-                endGameUI.Hide(true);
-            });
-
-            this.WaitForSecondsAndDo(0.5f, delegate
-            {
-                UICommonController.Instance.fadeUI.FadeOut();
-            });
-        }
-
-        void OnShowTutorial(object p_null)
-        {
-            tutoUI.Show(false);
         }
 
         void OnPlayerTurn(object p_unit)
