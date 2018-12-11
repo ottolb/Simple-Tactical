@@ -121,6 +121,7 @@ namespace Game.UI
         void OnUpdateActionButtons(object p_hasActions)
         {
             bool hasAction = (bool)p_hasActions;
+            Debug.LogFormat("#HUD# Set action button: {0}", hasAction);
             hudUI.UpdateActionButtons(hasAction);
         }
 

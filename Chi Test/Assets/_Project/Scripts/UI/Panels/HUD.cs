@@ -1,4 +1,14 @@
-﻿using System.Collections;
+﻿//
+// HUD.cs
+//
+// Author:
+//       Otto Lopes <otto@buildandrungames.com>
+//
+// Copyright (c) 2018 Build and Run Games 
+//
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

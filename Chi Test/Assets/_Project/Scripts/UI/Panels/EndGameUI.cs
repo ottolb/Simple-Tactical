@@ -1,4 +1,12 @@
-﻿
+﻿//
+// EndGameUI.cs
+//
+// Author:
+//       Otto Lopes <otto@buildandrungames.com>
+//
+// Copyright (c) 2018 Build and Run Games 
+//
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,9 +25,9 @@ namespace Game.UI
         protected override void Awake()
         {
             base.Awake();
-            recordCtr = transform.Find("Record").gameObject;
-            levelProgressT = transform.Find("Level Progress T").GetComponent<TextMeshProUGUI>();
-            score = transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
+            //recordCtr = transform.Find("Record").gameObject;
+            //levelProgressT = transform.Find("Level Progress T").GetComponent<TextMeshProUGUI>();
+            //score = transform.Find("Score Text").GetComponent<TextMeshProUGUI>();
 
         }
 

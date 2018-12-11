@@ -19,7 +19,6 @@ namespace Game
 
         public float smooth, smoothLookAt;
 
-        bool shouldLookAt;
 
         void Awake()
         {
@@ -37,7 +36,6 @@ namespace Game
         void OnUnitSelected(object p_unit)
         {
             _target = (UnityEngine.Transform)p_unit;
-            shouldLookAt = false;
             //_tr.DOLookAt(_target.position, 0.7f).OnComplete(delegate
             //{
             //    shouldLookAt = true;
