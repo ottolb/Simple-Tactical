@@ -17,9 +17,11 @@ namespace Game.Gameplay
         LineRenderer lineRenderer;
 
         public Color movementAllowedColor, movementBlockedColor;
+        public Gradient gradAllowedColor, gradBlockedColor;
 
         bool isSelected;
         bool hasMoveEnergy;
+        bool drawPath;
 
         protected override void Awake()
         {
@@ -109,8 +111,19 @@ namespace Game.Gameplay
             lineRenderer.SetPosition(1, position);
             bool aux = HasMoveEnergy(position);
             if (aux != hasMoveEnergy)
+            {
                 moveIndicatorMtl.DOColor(hasMoveEnergy ? movementAllowedColor : movementBlockedColor, 0.2f);
+                lineRenderer.colorGradient = hasMoveEnergy ? gradAllowedColor : gradBlockedColor;
+            }
             hasMoveEnergy = !aux;
+            lineRenderer.enabled = drawPath;
+            moveIndicator.SetActive(drawPath);
+        }
+
+        protected override void OnHoverUnit(object p_data)
+        {
+            base.OnHoverUnit(p_data);
+            drawPath = p_data == null;
         }
 
         public override void Attack(BaseCharacter p_target)
