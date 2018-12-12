@@ -34,6 +34,8 @@ namespace Game.UI
             if (Debug.isDebugBuild)
                 Debug.Log("#UI# OnClicked: " + this.name);
             evt.Invoke(this);
+
+            AudioController.Play("Click");
         }
     }
 

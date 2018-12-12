@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWaiting: 0
+  damageFX: {fileID: 72, guid: 8c6bea84ad7f24782a05a325784315c5, type: 3}
   moveIndicator: {fileID: 1923280394}
   movementAllowedColor: {r: 0.17933428, g: 0.5849056, b: 0.20745185, a: 1}
   movementBlockedColor: {r: 0.764151, g: 0.09019608, b: 0.21266466, a: 1}

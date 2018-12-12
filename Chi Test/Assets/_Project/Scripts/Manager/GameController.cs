@@ -72,6 +72,8 @@ namespace Game
 
         void OnAppLoaded(object p_desc)
         {
+            //AudioController.PlayMusicPlaylist("Game-Musics");
+            AudioController.PlayMusic("prelude", 1, 0, Random.Range(20, 60));
         }
 
         //void OnLevelChanged(object p_data)

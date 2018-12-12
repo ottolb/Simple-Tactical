@@ -18,6 +18,8 @@ namespace Game.Gameplay
         public bool isWaiting;
         protected bool dead;
 
+        public GameObject damageFX;
+
         protected NavMeshAgent _navMeshAgent;
         protected CharacterMesh _mesh;
         protected LifeBarWidget _lifeBarWidget;
@@ -150,6 +152,7 @@ namespace Game.Gameplay
         public virtual void TakeDamage(int p_amount)
         {
             CurrentLife -= p_amount;
+            ShowDamageFX(string.Format("-{0}", p_amount));
             if (CurrentLife <= 0)
             {
                 this.WaitForSecondsAndDo(0.4f, Die);
@@ -200,6 +203,17 @@ namespace Game.Gameplay
         protected bool AgentStopping()
         {
             return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
+        }
+
+        void ShowDamageFX(string p_damage)
+        {
+            Vector3 offset = Vector3.up * 2;
+
+            GameObject go = Instantiate(damageFX);
+            go.transform.position = transform.position + offset;
+
+            ScoreFX aux = go.GetComponent<ScoreFX>();
+            aux.Show(p_damage, 2.2f);
         }
     }
 }

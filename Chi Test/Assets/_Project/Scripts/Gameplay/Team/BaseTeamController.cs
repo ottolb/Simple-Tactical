@@ -12,7 +12,8 @@ namespace Game.Gameplay
 
         public int turnPriority;
 
-        public int totalUnits;
+        public int minUnits, maxUnits;
+        protected int totalUnits;
 
         public CharacterData[] characterPresets;
 
@@ -31,6 +32,8 @@ namespace Game.Gameplay
 
             EventManager.StartListening(N.Unit.ActionTaken, OnUnitActionTaken);
             EventManager.StartListening(N.Unit.Died, OnUnitDied);
+
+            totalUnits = Random.Range(minUnits, maxUnits);
         }
 
         protected virtual void Init()

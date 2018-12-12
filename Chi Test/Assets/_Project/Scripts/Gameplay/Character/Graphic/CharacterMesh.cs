@@ -55,16 +55,19 @@ namespace Game.Gameplay
         {
             //Set attack type based on character type, starting from 1
             _animator.SetInteger("AttackType", attackType);
+            AudioController.Play("Attack");
         }
 
         public void TakeHit()
         {
             _animator.SetTrigger("GetHit");
+            AudioController.Play("TakeHit");
         }
 
         public void Die()
         {
             _animator.SetTrigger("Die");
+            AudioController.Play("Die");
         }
 
         private void OnAnimatorMove()

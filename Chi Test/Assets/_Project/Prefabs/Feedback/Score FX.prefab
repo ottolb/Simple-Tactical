@@ -140,8 +140,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 12.4
-  m_fontSizeBase: 12.4
+  m_fontSize: 7.26
+  m_fontSizeBase: 7.26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -233,7 +233,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 72}
-  m_LocalRotation: {x: 0.3160548, y: 0, z: 0, w: 0.94874096}
+  m_LocalRotation: {x: 0.29118943, y: -0.4708126, z: 0.16808039, w: 0.8156551}
   m_LocalPosition: {x: -1.4881718, y: 50.886993, z: 3.9546967}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e964891e3ac1146e998659dc77bc8660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 6
+  time: 3
 --- !u!114 &7987495130986434341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,4 +281,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalAlpha: 0
-  speed: 1.72
+  speed: 0.97

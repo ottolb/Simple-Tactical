@@ -33,7 +33,7 @@ namespace Game
 
         private void Update()
         {
-            transform.Translate(transform.up * speed * Time.deltaTime);
+            transform.Translate(Vector3.up * speed * Time.deltaTime);
         }
     }
 }
