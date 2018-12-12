@@ -40,6 +40,13 @@ namespace Game.Event
             public const string SetAvailableActions = "HUD.SetAvailableActions";
         }
 
+        public class Cursor
+        {
+            public const string Normal = "Cursor.Normal";
+            public const string Attack = "Cursor.Attack";
+            public const string UnableAttack = "Cursor.UnableAttack";
+        }
+
         /// <summary>
         /// Loading notifications
         /// </summary>

@@ -121,10 +121,12 @@ namespace Game.Gameplay
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, unitSelectionLayerMask))
             {
+                BaseCharacter character = hit.collider.GetComponentInParent<BaseCharacter>();
+                bool isPlayerUnit = units.Contains(character);
                 if (_input.WasClicked())
                 {
-                    BaseCharacter character = hit.collider.GetComponentInParent<BaseCharacter>();
-                    if (units.Contains(character))
+
+                    if (isPlayerUnit)
                     {
                         SelectUnit(character);
                     }
@@ -136,10 +138,26 @@ namespace Game.Gameplay
                     return true;
                 }
                 else
+                {
                     EventManager.TriggerEvent(N.Unit.HoverUnit, hit.collider.transform.parent);
+                    if (isPlayerUnit)
+                    {
+                        EventUIManager.TriggerEvent(NUI.Cursor.Normal);
+                    }
+                    else if (selectedUnit.AvailableActions > 0)
+                    {
+                        if (selectedUnit.CheckAttack(character))
+                            EventUIManager.TriggerEvent(NUI.Cursor.Attack);
+                        else
+                            EventUIManager.TriggerEvent(NUI.Cursor.UnableAttack);
+                    }
+                }
             }
             else
+            {
                 EventManager.TriggerEvent(N.Unit.HoverUnit, null);
+                EventUIManager.TriggerEvent(NUI.Cursor.Normal);
+            }
 
             return false;
         }
