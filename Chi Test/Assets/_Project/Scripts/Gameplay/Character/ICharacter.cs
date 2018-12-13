@@ -2,6 +2,9 @@
 
 namespace Game.Gameplay
 {
+    /// <summary>
+    /// Specify basic character functions
+    /// </summary>
     public interface ICharacter
     {
 

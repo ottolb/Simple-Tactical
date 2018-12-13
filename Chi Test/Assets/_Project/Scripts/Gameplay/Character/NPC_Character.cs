@@ -48,7 +48,7 @@ namespace Game.Gameplay
         {
             base.Update();
 
-            if (dead)
+            if (isDead)
                 return;
 
             if (isMoving)

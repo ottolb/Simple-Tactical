@@ -65,9 +65,6 @@ namespace Game
             bool isPlayer = (bool)p_isPlayer;
             EventManager.TriggerEvent(N.Team.StopAll);
             EventManager.TriggerEvent(N.Game.Over, isPlayer);
-
-            //EventUIManager.TriggerEvent(NUI.EndGame.Show, isPlayer);
-
         }
 
         void OnAppLoaded(object p_desc)
@@ -75,14 +72,6 @@ namespace Game
             //AudioController.PlayMusicPlaylist("Game-Musics");
             AudioController.PlayMusic("prelude", 1, 0, Random.Range(20, 60));
         }
-
-        //void OnLevelChanged(object p_data)
-        //{
-        //    this.WaitForSecondsAndDo(1.4f, delegate
-        //    {
-        //        EventManager.TriggerEvent(N.Game.Start);
-        //    });
-        //}
 
     }
 }

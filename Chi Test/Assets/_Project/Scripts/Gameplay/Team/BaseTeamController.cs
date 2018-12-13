@@ -9,12 +9,18 @@ namespace Game.Gameplay
 
     public class BaseTeamController : MonoBehaviour
     {
-
+        /// <summary>
+        /// Specify play order
+        /// </summary>
         public int turnPriority;
 
+        [Range(1, 8)]
         public int minUnits, maxUnits;
         protected int totalUnits;
 
+        /// <summary>
+        /// List of character presets.
+        /// </summary>
         public CharacterData[] characterPresets;
 
         protected bool isPlaying, isMyTurn, isUnitSelected;
@@ -75,9 +81,13 @@ namespace Game.Gameplay
 
         }
 
-        void OnUnitActionTaken(object p_data)
+        /// <summary>
+        /// Called by unit when he performs an action
+        /// </summary>
+        /// <param name="p_unit">Unit that called the event</param>
+        void OnUnitActionTaken(object p_unit)
         {
-            BaseCharacter character = (BaseCharacter)p_data;
+            BaseCharacter character = (BaseCharacter)p_unit;
             if (units.Contains(character))
             {
                 ActionTakenByUnit(character);
@@ -86,7 +96,7 @@ namespace Game.Gameplay
 
         protected virtual void ActionTakenByUnit(BaseCharacter p_unit)
         {
-
+            //each Team Controller handle this
         }
 
         protected virtual void SelectUnit(BaseCharacter p_unit)
@@ -106,8 +116,11 @@ namespace Game.Gameplay
             BaseCharacter character = (BaseCharacter)p_data;
             if (units.Contains(character))
             {
+                //remove unit from list
                 units.Remove(character);
             }
+
+            //no more units
             if (units.Count == 0)
             {
                 TeamDefeated();
@@ -116,7 +129,7 @@ namespace Game.Gameplay
 
         protected virtual void TeamDefeated()
         {
-
+            //each Team Controller handle this
         }
     }
 }

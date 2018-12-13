@@ -6649,8 +6649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a0d85b66ab74e3ba365f61262f2880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitsController: []
-  turnIndex: 0
 --- !u!1001 &288934118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27113,7 +27111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turnPriority: 200
-  minUnits: 2
+  minUnits: 3
   maxUnits: 6
   characterPresets:
   - {fileID: 11400000, guid: 3617c1f96788c4751bb1fc61d6a106e8, type: 2}

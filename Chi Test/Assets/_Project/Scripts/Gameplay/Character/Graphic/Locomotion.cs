@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Locomotion
 {
@@ -47,5 +46,12 @@ public class Locomotion
     public bool IsState(string p_state)
     {
         return state.IsName(p_state);
+    }
+
+    public bool IsAttacking()
+    {
+        return IsState("Attacks.Sword Attack") ||
+            IsState("Attacks.Punch Attack") ||
+            IsState("Attacks.Magic Attack");
     }
 }

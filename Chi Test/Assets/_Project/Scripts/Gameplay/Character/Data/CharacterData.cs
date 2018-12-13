@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
+    /// <summary>
+    /// Character data model
+    /// </summary>
     public class CharacterData : ScriptableObject
     {
         public PlayerCharacterType playerType;

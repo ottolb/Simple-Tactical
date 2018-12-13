@@ -1,25 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Event;
-using Game.GameInput;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
 
+    /// <summary>
+    /// Handle Teams Controller turn
+    /// </summary>
     public class TurnController : MonoBehaviour
     {
 
-        bool isPlaying, isWaiting;
+        private bool isPlaying, isWaiting;
 
-        public List<BaseTeamController> unitsController;
+        private List<BaseTeamController> unitsController;
 
-        public int turnIndex;
+        private int turnIndex;
+
+        private void Awake()
+        {
+            unitsController = new List<BaseTeamController>();
+        }
 
         void Start()
         {
-            EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
-
             EventManager.StartListening(N.Game.Start, OnGameStarted);
             EventManager.StartListening(N.Game.Over, OnGameOver);
 
@@ -76,13 +80,5 @@ namespace Game.Gameplay
             if (turnIndex >= unitsController.Count)
                 turnIndex = 0;
         }
-
-        void OnBalanceUpdated(object p_data)
-        {
-
-        }
-
-
-
     }
 }
