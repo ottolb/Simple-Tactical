@@ -12,9 +12,9 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Chi Test
-  defaultCursor: {fileID: 2800000, guid: 2d39db4d4fbad43d8a46fb3f1262560b, type: 3}
+  companyName: Otto
+  productName: Simple Tactical
+  defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 0
@@ -113,7 +113,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.01.0
+  bundleVersion: 0.2.40
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -148,8 +148,9 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.otto.chi
+    Standalone: com.otto.simpletactical
   buildNumber:
+    Standalone: 10
     iOS: 0
   AndroidBundleVersionCode: 0
   AndroidMinSdkVersion: 16
