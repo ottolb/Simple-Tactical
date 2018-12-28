@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f00752af87ba49d2933bdace5398aea, type: 3}
+  m_Name: Check End Turn and Chase State
+  m_EditorClassIdentifier: 
+  actions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: b0081f703a2be4d2facfc7b32b38fc86, type: 2}
+    trueState: {fileID: 11400000, guid: 7155ba954eae240d4b23deb7aaebebe1, type: 2}
+    falseState: {fileID: 11400000, guid: b28173e26a26c4c0ab2698b5162004c6, type: 2}
+  sceneGizmoColor: {r: 0.8207547, g: 0, b: 0.6642849, a: 1}

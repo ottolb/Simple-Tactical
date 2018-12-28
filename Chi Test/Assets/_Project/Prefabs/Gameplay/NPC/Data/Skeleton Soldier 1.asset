@@ -20,3 +20,4 @@ MonoBehaviour:
   attackForce: 38
   attackRange: 2.81
   attackAnimationType: 3
+  mentality: {fileID: 11400000, guid: a17461c6a05804160890dec75964c2e3, type: 2}

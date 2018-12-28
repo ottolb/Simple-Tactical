@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f00752af87ba49d2933bdace5398aea, type: 3}
+  m_Name: Def Wait Turn
+  m_EditorClassIdentifier: 
+  actions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: 559d7dc990b1940a78a0af51e47cec39, type: 2}
+    trueState: {fileID: 11400000, guid: cea97727572a04ecc9c40222e921038e, type: 2}
+    falseState: {fileID: 11400000, guid: 03c4a45ef1e1d4d7b9fda132225c1e5e, type: 2}
+  sceneGizmoColor: {r: 0.14956279, g: 0.4716981, b: 0, a: 1}

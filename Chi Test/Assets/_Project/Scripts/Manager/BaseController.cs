@@ -16,16 +16,16 @@ using UnityEngine.UI;
 namespace Game
 {
 
-	public class BaseController : MonoBehaviour
-	{
-		
-		protected virtual void Awake()
-		{
-			ListenEvents();
-		}
+    public class BaseController : MonoBehaviour
+    {
 
-		protected virtual void ListenEvents()
-		{
-		}
-	}
+        protected virtual void Awake()
+        {
+            ListenEvents();
+        }
+
+        protected virtual void ListenEvents()
+        {
+        }
+    }
 }

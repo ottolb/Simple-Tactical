@@ -20,16 +20,27 @@ namespace Game.Gameplay
         ///state properties
         public bool isWaiting;
         protected bool isDead;
+        /// <summary>
+        /// Is agent moving?
+        /// </summary>
+        protected bool isMoving;
+        protected bool myTurn;
 
-        public GameObject damageFX;
 
         protected NavMeshAgent _navMeshAgent;
+
         protected CharacterMesh _mesh;
         protected LifeBarWidget _lifeBarWidget;
         protected CharacterData _characterData;
 
         protected virtual void Awake()
         {
+            GetReferences();
+        }
+
+        void GetReferences()
+        {
+            if (_navMeshAgent != null) return;
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _mesh = GetComponentInChildren<CharacterMesh>();
             _lifeBarWidget = GetComponentInChildren<LifeBarWidget>();
@@ -50,6 +61,7 @@ namespace Game.Gameplay
         /// <param name="p_characterData">P character data.</param>
         public virtual void Init(CharacterData p_characterData)
         {
+            GetReferences();
             //setup data
             _characterData = p_characterData;
             CurrentLife = _characterData.life;
@@ -173,6 +185,7 @@ namespace Game.Gameplay
             AvailableActions--;
             _mesh.Attack();
             p_target.TakeDamage(_characterData.attackForce);
+            this.WaitForSecondsAndDo(0.5f, NotifyAction);
         }
 
         /// <summary>
@@ -182,7 +195,10 @@ namespace Game.Gameplay
         public virtual void TakeDamage(int p_amount)
         {
             CurrentLife -= p_amount;
-            ShowDamageFX(string.Format("-{0}", p_amount));
+            this.WaitForSecondsAndDo(0.4f, delegate
+            {
+                _mesh.ShowDamageFX(string.Format("-{0}", p_amount));
+            });
             if (CurrentLife <= 0)
             {
                 this.WaitForSecondsAndDo(0.4f, Die);
@@ -191,6 +207,16 @@ namespace Game.Gameplay
             {
                 //todo: Could use an animation event
                 this.WaitForSecondsAndDo(0.4f, _mesh.TakeHit);
+            }
+        }
+
+        public void NotifyAction()
+        {
+            EventManager.TriggerEvent(N.Unit.ActionTaken, this);
+            if (_availableActios == 0)
+            {
+                myTurn = false;
+                EventManager.TriggerEvent(N.Unit.EndTurn, this);
             }
         }
 
@@ -208,7 +234,7 @@ namespace Game.Gameplay
         /// Dynamic character life, for total life use <see cref="CharacterData.life"/>
         /// </summary>
         /// <value>The current life.</value>
-        protected int CurrentLife
+        public int CurrentLife
         {
             set
             {
@@ -230,7 +256,6 @@ namespace Game.Gameplay
             set
             {
                 _availableActios = value;
-                EventManager.TriggerEvent(N.Unit.ActionTaken, this);
             }
             get
             {
@@ -238,26 +263,30 @@ namespace Game.Gameplay
             }
         }
 
-        protected bool AgentDone()
+        public bool AgentDone()
         {
             return !_navMeshAgent.pathPending && AgentStopping();
         }
 
-        protected bool AgentStopping()
+        public bool AgentStopping()
         {
             return _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance;
         }
 
-        void ShowDamageFX(string p_damage)
+        public NavMeshAgent NavMeshAgent
         {
-            //todo: Use an event to let another controller handle it?
-            Vector3 offset = Vector3.up * 2;
+            get
+            {
+                return _navMeshAgent;
+            }
+        }
 
-            GameObject go = Instantiate(damageFX);
-            go.transform.position = transform.position + offset;
-
-            ScoreFX aux = go.GetComponent<ScoreFX>();
-            aux.Show(p_damage, 2.2f);
+        public CharacterData CharacterData
+        {
+            get
+            {
+                return _characterData;
+            }
         }
     }
 }

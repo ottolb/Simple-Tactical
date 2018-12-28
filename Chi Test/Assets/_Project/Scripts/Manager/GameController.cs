@@ -65,12 +65,13 @@ namespace Game
             bool isPlayer = (bool)p_isPlayer;
             EventManager.TriggerEvent(N.Team.StopAll);
             EventManager.TriggerEvent(N.Game.Over, isPlayer);
+            EventUIManager.TriggerEvent(NUI.Cursor.Normal);
         }
 
         void OnAppLoaded(object p_desc)
         {
-            //AudioController.PlayMusicPlaylist("Game-Musics");
             AudioController.PlayMusic("prelude", 1, 0, Random.Range(20, 60));
+            EventUIManager.TriggerEvent(NUI.Cursor.Normal);
         }
 
     }

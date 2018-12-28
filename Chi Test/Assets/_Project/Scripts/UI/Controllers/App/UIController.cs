@@ -44,7 +44,12 @@ namespace Game.UI
 
         void OnAppLoaded(object p_desc)
         {
-            homeUI.Show(false);
+            this.WaitForSecondsAndDo(1, delegate
+            {
+                homeUI.Show(true);
+            });
+
+
             //Init other UIs since app load
             endGameUI.Hide(false);
             hudUI.Hide(false);

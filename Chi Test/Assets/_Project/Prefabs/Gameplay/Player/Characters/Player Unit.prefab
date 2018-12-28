@@ -206,7 +206,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWaiting: 0
-  damageFX: {fileID: 72, guid: 8c6bea84ad7f24782a05a325784315c5, type: 3}
   moveIndicator: {fileID: 1923280394}
   movementAllowedColor: {r: 0.17933428, g: 0.5849056, b: 0.20745185, a: 1}
   movementBlockedColor: {r: 0.764151, g: 0.09019608, b: 0.21266466, a: 1}
@@ -277,7 +276,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3185444865318764000}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.4
+  m_Radius: 0.61
   m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
@@ -323,6 +322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outline: {fileID: 0}
   hoverColor: {r: 0.3023318, g: 0.8113208, b: 0.3536754, a: 1}
+  damageFX: {fileID: 72, guid: 8c6bea84ad7f24782a05a325784315c5, type: 3}
 --- !u!1001 &3510476712699233450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -578,11 +578,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3677601011647594585, guid: 71459218dfb9b45eca961adde1e8d5ac,
-        type: 3}
-      propertyPath: cameraToLook
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3677601011773298016, guid: 71459218dfb9b45eca961adde1e8d5ac,
         type: 3}

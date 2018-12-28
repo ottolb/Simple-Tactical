@@ -3,41 +3,58 @@ using System.Collections.Generic;
 using Game.Event;
 using UnityEngine;
 using DG.Tweening;
-
+using Game.FSM;
 
 namespace Game.Gameplay
 {
     public class NPC_Character : BaseCharacter
     {
-        private float totalDistance;
+        [HideInInspector]
+        public float totalDistance;
+        /// <summary>
+        /// The target to attack or to approach
+        /// </summary>
         private BaseCharacter _target;
-        private bool isMoving;
+
+        public State startState;
+        private State currentState;
+        public State remainState;
+        public Transform eyes;
+        [HideInInspector] public float stateTimeElapsed;
 
 
+        protected override void Awake()
+        {
+            base.Awake();
+            EventManager.StartListening(N.Unit.SelectUnit, OnUnitSelected);
+        }
 
         public override void Init(CharacterData p_characterData)
         {
             base.Init(p_characterData);
             isMoving = false;
+            startState = p_characterData.mentality;
         }
 
         public override void StartTurn()
         {
             base.StartTurn();
+            currentState = startState;
             totalDistance = -1;
             isMoving = false;
         }
 
         public override void Move(Vector3 p_point)
         {
-            if (CheckAttack(_target))
+            //if (CheckAttack(_target))
+            //{
+            //    Debug.LogFormat("#NPC# NPC {0} will attack now!", name);
+            //    Attack(_target);
+            //    AvailableActions = 0;
+            //}
+            //else
             {
-                Debug.LogFormat("#NPC# NPC {0} will attack now!", name);
-                Attack(_target);
-                AvailableActions = 0;
-            }
-            else
-            {
+                totalDistance = -1;
                 _navMeshAgent.isStopped = false;
                 isMoving = true;
                 base.Move(p_point);
@@ -48,11 +65,13 @@ namespace Game.Gameplay
         {
             base.Update();
 
-            if (isDead)
+            if (isDead || !myTurn)
                 return;
 
-            if (isMoving)
-                HandleMovement();
+            //if (isMoving)
+            //HandleMovement();
+
+            UpdateFSM();
         }
 
         void HandleMovement()
@@ -89,12 +108,7 @@ namespace Game.Gameplay
         {
             if (p_data as Transform == transform)
             {
-
-
-            }
-            else
-            {
-
+                StartFSM();
             }
         }
 
@@ -111,15 +125,72 @@ namespace Game.Gameplay
 
         public override void Attack(BaseCharacter p_target)
         {
-            if (CheckAttack(p_target))
+            base.Attack(p_target);
+        }
+
+        public void StartFSM()
+        {
+            currentState.UpdateState(this);
+
+            myTurn = true;
+        }
+
+        void UpdateFSM()
+        {
+            currentState.UpdateState(this);
+        }
+
+        void OnDrawGizmos()
+        {
+            if (currentState != null && _characterData)
             {
-                base.Attack(p_target);
+                Gizmos.color = currentState.sceneGizmoColor;
+                Gizmos.DrawWireSphere(transform.position, _characterData.attackRange);
             }
-            else
+        }
+
+        public void TransitionToState(State nextState)
+        {
+            if (nextState != remainState)
             {
-                Debug.LogFormat("#Character# Character {0} is far to attack {1}", name, p_target.name);
-                AvailableActions--;
+                //bool goToNextState = currentState.cost == 0;
+
+                Debug.LogFormat("#FSM# Unit {0} switch from {1} to {2}",
+                                name, currentState.name, nextState.name);
+                currentState = nextState;
+                OnExitState();
             }
+        }
+
+        public bool CheckIfCountDownElapsed(float duration)
+        {
+            stateTimeElapsed += Time.deltaTime;
+            return (stateTimeElapsed >= duration);
+        }
+
+        private void OnExitState()
+        {
+            stateTimeElapsed = 0;
+        }
+
+        public void Stop()
+        {
+            myTurn = false;
+            currentState = remainState;
+        }
+
+        public List<BaseCharacter> PlayerUnits { get; set; }
+
+        public List<BaseCharacter> Allies { get; set; }
+
+        public bool HasTarget
+        {
+            get { return _target != null; }
+        }
+
+        public BaseCharacter GetTarget
+        {
+            get { return _target; }
         }
     }
 }

@@ -64,6 +64,8 @@ namespace Game.Gameplay
         {
             base.StartTurn();
 
+            EventManager.TriggerEvent(N.Unit.PlayerUnits, units);
+
             foreach (var unit in units)
             {
                 unit.StartTurn();
@@ -103,7 +105,7 @@ namespace Game.Gameplay
 
                 //cubeHitPos.transform.position = hitPosition;
 
-                if (_input.WasClicked())
+                if (_input.WasClicked() && UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject == null)
                 {
                     EventManager.TriggerEvent(N.Unit.MoveUnit, hitPosition);
                 }
@@ -165,6 +167,7 @@ namespace Game.Gameplay
         void OnPlayerTurnEndAction(object p_data)
         {
             EventManager.TriggerEvent(N.Game.TurnFinished);
+            EventUIManager.TriggerEvent(NUI.Cursor.Normal);
         }
 
         void OnWaitAction(object p_data)

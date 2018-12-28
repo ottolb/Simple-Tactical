@@ -10,6 +10,8 @@ namespace Game.Gameplay
         public Outline outline;
         public Color hoverColor;
 
+        public GameObject damageFX;
+
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
         public Locomotion locomotion;
@@ -72,8 +74,21 @@ namespace Game.Gameplay
 
         private void OnAnimatorMove()
         {
+            // agent velocity based on animation root speed
             _navMeshAgent.velocity = _animator.deltaPosition / Time.deltaTime;
             //transform.rotation = animator.rootRotation;
+        }
+
+        public void ShowDamageFX(string p_damage)
+        {
+            //todo: Use an event to let another controller handle it?
+            Vector3 offset = Vector3.up * 2;
+
+            GameObject go = Instantiate(damageFX);
+            go.transform.position = transform.position + offset;
+
+            ScoreFX aux = go.GetComponent<ScoreFX>();
+            aux.Show(p_damage, 2.2f);
         }
 
         public void SetNavMeshAgent(NavMeshAgent p_navMeshAgent)

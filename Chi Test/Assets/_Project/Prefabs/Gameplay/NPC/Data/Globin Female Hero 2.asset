@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Globin Female Hero 2
   m_EditorClassIdentifier: 
   playerType: 0
-  enemyType: 4
+  enemyType: 3
   totalActions: 2
   life: 90
   moveArea: 3.5
   attackForce: 35
   attackRange: 2.36
   attackAnimationType: 2
+  mentality: {fileID: 11400000, guid: a17461c6a05804160890dec75964c2e3, type: 2}

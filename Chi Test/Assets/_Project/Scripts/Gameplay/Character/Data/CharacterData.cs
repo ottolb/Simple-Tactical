@@ -27,5 +27,7 @@ namespace Game.Gameplay
 
         [Tooltip("Type of animation"), Range(1, 5)]
         public int attackAnimationType;
+
+        public FSM.State mentality;
     }
 }

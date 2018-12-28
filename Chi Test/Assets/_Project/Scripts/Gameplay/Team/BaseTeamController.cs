@@ -37,6 +37,7 @@ namespace Game.Gameplay
             EventManager.StartListening(N.Game.TurnChanged, OnTurnChanged);
 
             EventManager.StartListening(N.Unit.ActionTaken, OnUnitActionTaken);
+            EventManager.StartListening(N.Unit.EndTurn, OnUnitEndTurn);
             EventManager.StartListening(N.Unit.Died, OnUnitDied);
 
             totalUnits = Random.Range(minUnits, maxUnits);
@@ -60,6 +61,7 @@ namespace Game.Gameplay
             isMyTurn = true;
         }
 
+        #region Game Events
         void OnGameSetup(object p_data)
         {
             Init();
@@ -81,6 +83,9 @@ namespace Game.Gameplay
 
         }
 
+        #endregion
+
+        #region Unit Events
         /// <summary>
         /// Called by unit when he performs an action
         /// </summary>
@@ -94,7 +99,46 @@ namespace Game.Gameplay
             }
         }
 
+        /// <summary>
+        /// Called by unit when he finishes all actions
+        /// </summary>
+        /// <param name="p_unit">Unit that called the event</param>
+        void OnUnitEndTurn(object p_unit)
+        {
+            BaseCharacter character = (BaseCharacter)p_unit;
+            if (units.Contains(character))
+            {
+                UnitEndedTurn(character);
+            }
+        }
+
+        /// <summary>
+        /// When a Unit dies, could be from another team
+        /// </summary>
+        /// <param name="p_data">P data.</param>
+        void OnUnitDied(object p_data)
+        {
+            BaseCharacter character = (BaseCharacter)p_data;
+            if (units.Contains(character))
+            {
+                //remove unit from list
+                units.Remove(character);
+                //no more units
+                if (units.Count == 0)
+                {
+                    TeamDefeated();
+                }
+            }
+        }
+
+        #endregion
+
         protected virtual void ActionTakenByUnit(BaseCharacter p_unit)
+        {
+            //each Team Controller handle this
+        }
+
+        protected virtual void UnitEndedTurn(BaseCharacter p_unit)
         {
             //each Team Controller handle this
         }
@@ -109,22 +153,6 @@ namespace Game.Gameplay
         protected virtual void CreateUnits()
         {
             units = new List<BaseCharacter>();
-        }
-
-        void OnUnitDied(object p_data)
-        {
-            BaseCharacter character = (BaseCharacter)p_data;
-            if (units.Contains(character))
-            {
-                //remove unit from list
-                units.Remove(character);
-            }
-
-            //no more units
-            if (units.Count == 0)
-            {
-                TeamDefeated();
-            }
         }
 
         protected virtual void TeamDefeated()

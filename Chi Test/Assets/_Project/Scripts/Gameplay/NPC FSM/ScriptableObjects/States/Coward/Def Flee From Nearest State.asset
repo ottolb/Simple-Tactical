@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f00752af87ba49d2933bdace5398aea, type: 3}
+  m_Name: Def Flee From Nearest State
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 37fae240afda74f4ba8a161a44446894, type: 2}
+  transitions:
+  - decision: {fileID: 0}
+    trueState: {fileID: 11400000, guid: b20319c9079ff405c90ea67fc6d6c70b, type: 2}
+    falseState: {fileID: 0}
+  sceneGizmoColor: {r: 0.7830189, g: 0.025854412, b: 0.025854412, a: 1}

@@ -22,6 +22,7 @@ namespace Game.Gameplay
             base.Start();
 
             EventManager.StartListening(N.Unit.PlayerUnits, OnPlayerUnitsSet);
+            EventManager.StartListening(N.Team.StopAll, OnStopUnits);
             //EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
 
             //UI events
@@ -34,6 +35,8 @@ namespace Game.Gameplay
 
             isUnitSelected = false;
             CreateUnits();
+            SetupUnits();
+            //this.WaitForSecondsAndDo(4, SetupUnits);
         }
 
         protected override void CreateUnits()
@@ -50,9 +53,22 @@ namespace Game.Gameplay
         {
             Transform point = (UnityEngine.Transform)p_data;
             GameObject go = Instantiate(playerPrefab, point.position, point.rotation);
-            units.Add(go.GetComponent<BaseCharacter>());
-            units[units.Count - 1].Init(characterPresets[Random.Range(0, characterPresets.Length)]);
+            go.SetActive(true);
+            NPC_Character unit = go.GetComponent<NPC_Character>();
+            units.Add(unit);
         }
+
+        void SetupUnits()
+        {
+            //int i = 0;
+            foreach (var unit in units)
+            {
+                unit.Init(characterPresets[Random.Range(0, characterPresets.Length)]);
+                //unit.Init(characterPresets[i]);
+                //i++;
+            }
+        }
+
 
         protected override void StartTurn()
         {
@@ -65,61 +81,13 @@ namespace Game.Gameplay
 
             EventUIManager.TriggerEvent(NUI.HUD.NPCTurn);
 
-            currentUnitID = 0;
-            CommandUnit();
+            currentUnitID = -1;
+            CommandNextUnit();
         }
 
-        void CommandUnit()
-        {
-            Debug.Log("#NPC TEAM# Command next unit");
-            SelectUnit(units[currentUnitID]);
-            FindNearestPlayerUnit();
-        }
-
-        void FindNearestPlayerUnit()
-        {
-            float distance = Mathf.Infinity;
-            float auxD;
-            BaseCharacter nearestPlayerUnit = null;
-            foreach (var unit in playerUnits)
-            {
-                auxD = Vector3.Distance(unit.transform.position, selectedUnit.transform.position);
-                if (auxD < distance)
-                {
-                    distance = auxD;
-                    nearestPlayerUnit = unit;
-                }
-            }
-
-            if (nearestPlayerUnit)
-            {
-                (selectedUnit as NPC_Character).SetTarget(nearestPlayerUnit);
-                MoveUnit(nearestPlayerUnit.transform.position);
-            }
-        }
-
-        void MoveUnit(Vector3 p_pos)
-        {
-            selectedUnit.Move(p_pos);
-        }
-
-        void OnPlayerUnitsSet(object p_data)
-        {
-            playerUnits = (List<BaseCharacter>)p_data;
-        }
-
-        protected override void ActionTakenByUnit(BaseCharacter p_unit)
-        {
-            base.ActionTakenByUnit(p_unit);
-            if (p_unit.AvailableActions > 0)
-                return;
-            this.WaitForSecondsAndDo(1.6f, WaitCommands);
-        }
-
-        void WaitCommands()
+        void CommandNextUnit()
         {
             currentUnitID++;
-            Debug.Log("#NPC TEAM# currentUnitID " + currentUnitID);
             if (currentUnitID >= units.Count)
             {
                 Debug.Log("#NPC TEAM# NPC Team finished turn");
@@ -127,14 +95,40 @@ namespace Game.Gameplay
             }
             else
             {
-                CommandUnit();
+                Debug.Log("#NPC TEAM# Command next unit " + currentUnitID);
+                SelectUnit(units[currentUnitID]);
+                //todo: Start Unit FSM from here
             }
+        }
+
+        void OnPlayerUnitsSet(object p_data)
+        {
+            playerUnits = (List<BaseCharacter>)p_data;
+            foreach (var unit in units)
+            {
+                (unit as NPC_Character).PlayerUnits = playerUnits;
+                (unit as NPC_Character).Allies = units;
+            }
+        }
+
+        protected override void UnitEndedTurn(BaseCharacter p_unit)
+        {
+            base.UnitEndedTurn(p_unit);
+            this.WaitForSecondsAndDo(0.5f, CommandNextUnit);
         }
 
         protected override void TeamDefeated()
         {
             base.TeamDefeated();
             EventManager.TriggerEvent(N.Team.Defeat, false);
+        }
+
+        void OnStopUnits(object p_data)
+        {
+            foreach (var unit in units)
+            {
+                (unit as NPC_Character).Stop();
+            }
         }
     }
 }

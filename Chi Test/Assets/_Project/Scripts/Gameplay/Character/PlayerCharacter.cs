@@ -46,8 +46,15 @@ namespace Game.Gameplay
             lineRenderer.enabled = false;
             moveAreaParticle.SetActive(false);
             moveIndicator.SetActive(false);
-
+            _navMeshAgent.isStopped = true;
             isSelected = false;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if (isMoving)
+                HandleMovement();
         }
 
         void OnUnitSelected(object p_data)
@@ -93,11 +100,23 @@ namespace Game.Gameplay
 
         public override void Move(Vector3 p_point)
         {
+            _navMeshAgent.isStopped = false;
             base.Move(p_point);
 
-
+            isMoving = true;
             UpdateActions();
             Debug.LogFormat("#Character# Character {0} moved ", name);
+        }
+
+        void HandleMovement()
+        {
+            if (AgentDone())
+            {
+                Debug.LogFormat("#Character# Character {0} done movement: ", name);
+                isMoving = false;
+                NotifyAction();
+                _navMeshAgent.isStopped = true;
+            }
         }
 
         void OnCheckUnitMovement(object p_data)

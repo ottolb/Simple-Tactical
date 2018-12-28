@@ -115,6 +115,7 @@ namespace Game.Event
             public const string PlayerUnits = "Unit.PlayerUnits";
 
             public const string ActionTaken = "Unit.ActionTaken";
+            public const string EndTurn = "Unit.EndTurn";
         }
 
         public class Team
