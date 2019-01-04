@@ -23,10 +23,6 @@ namespace Game.Gameplay
 
             EventManager.StartListening(N.Unit.PlayerUnits, OnPlayerUnitsSet);
             EventManager.StartListening(N.Team.StopAll, OnStopUnits);
-            //EventManager.StartListening(N.GameBalance.Updated, OnBalanceUpdated);
-
-            //UI events
-            //EventUIManager.StartListening(NUI.HUD.EndTurn, OnPlayerTurnEndAction);
         }
 
         protected override void Init()
@@ -36,7 +32,6 @@ namespace Game.Gameplay
             isUnitSelected = false;
             CreateUnits();
             SetupUnits();
-            //this.WaitForSecondsAndDo(4, SetupUnits);
         }
 
         protected override void CreateUnits()
@@ -60,15 +55,12 @@ namespace Game.Gameplay
 
         void SetupUnits()
         {
-            //int i = 0;
+            //Init all spawned units with a random preset
             foreach (var unit in units)
             {
                 unit.Init(characterPresets[Random.Range(0, characterPresets.Length)]);
-                //unit.Init(characterPresets[i]);
-                //i++;
             }
         }
-
 
         protected override void StartTurn()
         {
@@ -97,7 +89,6 @@ namespace Game.Gameplay
             {
                 Debug.Log("#NPC TEAM# Command next unit " + currentUnitID);
                 SelectUnit(units[currentUnitID]);
-                //todo: Start Unit FSM from here
             }
         }
 
