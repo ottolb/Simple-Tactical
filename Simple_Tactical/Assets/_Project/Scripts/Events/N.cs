@@ -49,20 +49,7 @@ namespace Game.Event
             /// </summary>
             public const string Start = "Game.Started";
 
-
             public const string Over = "Game.Over";
-            public const string Points = "Game.Points";
-
-            public const string ChangeColors = "Game.ChangeColors";
-
-            /// <summary>
-            /// All blocks destroyed
-            /// </summary>
-            public const string AllBlocksDestroyed = "Game.AllBlocksDestroyed";
-            /// <summary>
-            /// Level Win: All blocks captured.
-            /// </summary>
-            //public const string AllBlocksCaptured = "Game.AllBlocksCaptured";
 
             public const string TurnChanged = "Game.TurnChanged";
             public const string TurnFinished = "Game.TurnFinished";

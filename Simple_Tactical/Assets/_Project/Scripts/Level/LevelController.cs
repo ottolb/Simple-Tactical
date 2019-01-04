@@ -38,16 +38,11 @@ namespace Game.Level
         {
             if (!isPlaying)
                 return;
-            CheckProgress();
+            //Cheat code to end level
             if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.L))
             {
-                EventManager.TriggerEvent(N.Game.AllBlocksDestroyed, this);
+                EventManager.TriggerEvent(N.Team.Defeat, false);
             }
-        }
-
-        void CheckProgress()
-        {
-
         }
 
         void OnGameLoad(object p_desc)
@@ -74,8 +69,5 @@ namespace Game.Level
         {
             level.Load();
         }
-
-
-
     }
 }

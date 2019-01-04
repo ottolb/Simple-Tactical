@@ -17,8 +17,6 @@ namespace Game.Level
         private List<Transform> enemyAvailablePoints;
 
 
-
-        // Use this for initialization
         void Start()
         {
             EventManager.StartListening(N.Level.RequestPlayerSP, OnRequestPlayerSpawnPoint);
@@ -43,6 +41,10 @@ namespace Game.Level
             EventManager.TriggerEvent(N.Level.SetNPC_SP, GetSPTransform(enemyAvailablePoints));
         }
 
+        /// <summary>
+        /// Get the first available spawn point
+        /// </summary>
+        /// <returns>The spawn point transform.</returns>
         Transform GetSPTransform(List<Transform> p_points)
         {
             Transform p = p_points[0];
@@ -52,6 +54,7 @@ namespace Game.Level
 
         void Clean()
         {
+            //Random spawn points
             playerAvailablePoints = new List<Transform>(playerSpawnPoints);
             playerAvailablePoints = ConversorUtil.Randomize(playerAvailablePoints);
 

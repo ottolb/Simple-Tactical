@@ -20,12 +20,11 @@ namespace Game
         protected override void ListenEvents()
         {
             base.ListenEvents();
+            //App events
             EventManager.StartListening(N.App.Loaded, OnAppLoaded);
-            //EventManager.StartListening(N.Level.NextLevel, OnLevelChanged);
-
             EventManager.StartListening(N.Team.Defeat, OnTeamDefeated);
 
-
+            //UI events
             EventUIManager.StartListening(NUI.Home.Play, OnPlayClicked);
             EventUIManager.StartListening(NUI.EndGame.Restart, OnRestartClicked);
         }
