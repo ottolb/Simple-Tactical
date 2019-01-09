@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f00752af87ba49d2933bdace5398aea, type: 3}
-  m_Name: Defensive Stationary
+  m_Name: 0 Defensive Stationary
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 11400000, guid: 8ab48579255b540f1a4d956e376b26c0, type: 2}

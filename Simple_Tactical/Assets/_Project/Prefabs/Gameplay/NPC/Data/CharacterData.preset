@@ -57,3 +57,7 @@ Preset:
     propertyPath: attackAnimationType
     value: 2
     objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: mentality
+    value: 
+    objectReference: {fileID: 0}

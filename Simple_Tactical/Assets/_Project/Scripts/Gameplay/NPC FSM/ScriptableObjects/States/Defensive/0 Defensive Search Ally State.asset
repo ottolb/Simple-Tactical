@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f00752af87ba49d2933bdace5398aea, type: 3}
-  m_Name: Search Ally State
+  m_Name: 0 Defensive Search Ally State
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 11400000, guid: c9c7ad10ae8de475c8576d2165797121, type: 2}
