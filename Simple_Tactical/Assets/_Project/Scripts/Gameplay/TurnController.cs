@@ -45,7 +45,6 @@ namespace Game.Gameplay
             }
         }
 
-
         void OnGameStarted(object p_data)
         {
             isWaiting = false;

@@ -90,8 +90,6 @@ namespace Game
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-
-
         void ShowDebugInfo()
         {
             string versionStr;

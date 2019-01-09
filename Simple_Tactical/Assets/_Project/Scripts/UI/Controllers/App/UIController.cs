@@ -8,11 +8,8 @@
 //
 
 
-using System.Collections;
 using System.Collections.Generic;
 using Game.Event;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -101,7 +98,6 @@ namespace Game.UI
             Dictionary<string, int> dict = (Dictionary<string, int>)p_hasActions;
             hudUI.SetRemainingActions(dict["current"], dict["total"]);
         }
-
 
         #region Properties
 

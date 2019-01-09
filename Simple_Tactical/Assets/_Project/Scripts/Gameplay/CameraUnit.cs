@@ -40,10 +40,6 @@ namespace Game
         void OnUnitSelected(object p_unit)
         {
             _target = (UnityEngine.Transform)p_unit;
-            //_tr.DOLookAt(_target.position, 0.7f).OnComplete(delegate
-            //{
-            //    shouldLookAt = true;
-            //});
         }
 
         void OnGameStart(object p_desc)
