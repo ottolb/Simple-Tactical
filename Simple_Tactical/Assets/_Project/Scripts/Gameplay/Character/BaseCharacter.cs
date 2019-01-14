@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Game.Data;
 using Game.Event;
+using Game.Event.New;
 using Game.UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -53,7 +54,10 @@ namespace Game.Gameplay
         protected virtual void Start()
         {
             EventManager.StartListening(N.Unit.HoverUnit, OnHoverUnit);
+            //GameEventManager.StartListening<Transform>(N.Unit.HoverUnit, OnHoverUnit);
         }
+
+
 
         /// <summary>
         /// Init character graphics and fields from a data model
@@ -106,6 +110,18 @@ namespace Game.Gameplay
         }
 
         protected virtual void OnHoverUnit(object p_data)
+        {
+            if (p_data as Transform == transform)
+            {
+                _mesh.Hover();
+            }
+            else
+            {
+                _mesh.StopOutline();
+            }
+        }
+
+        protected virtual void OnHoverUnit(Transform p_data)
         {
             if (p_data as Transform == transform)
             {
