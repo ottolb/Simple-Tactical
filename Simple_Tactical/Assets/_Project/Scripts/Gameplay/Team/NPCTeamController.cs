@@ -108,9 +108,9 @@ namespace Game.Gameplay
             this.WaitForSecondsAndDo(0.5f, CommandNextUnit);
         }
 
-        protected override void TeamDefeated()
+        protected override void OnTeamDefeated()
         {
-            base.TeamDefeated();
+            base.OnTeamDefeated();
             EventManager.TriggerEvent(N.Team.Defeat, false);
         }
 

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Game.Event;
-using Game.GameInput;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -126,7 +124,7 @@ namespace Game.Gameplay
                 //no more units
                 if (units.Count == 0)
                 {
-                    TeamDefeated();
+                    OnTeamDefeated();
                 }
             }
         }
@@ -155,7 +153,7 @@ namespace Game.Gameplay
             units = new List<BaseCharacter>();
         }
 
-        protected virtual void TeamDefeated()
+        protected virtual void OnTeamDefeated()
         {
             //each Team Controller handle this
         }
