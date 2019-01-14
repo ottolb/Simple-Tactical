@@ -89,6 +89,20 @@ namespace Game.Event
                 thisEvent.Invoke(p_object);
             }
         }
+
+        public static void StopAll()
+        {
+            foreach (var item in instance.eventDictionary)
+            {
+                item.Value.RemoveAllListeners();
+            }
+            instance.eventDictionary.Clear();
+        }
+
+        private void OnDestroy()
+        {
+            StopAll();
+        }
     }
 
     [System.Serializable]
